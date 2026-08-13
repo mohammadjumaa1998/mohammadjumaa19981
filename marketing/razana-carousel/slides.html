@@ -7,41 +7,36 @@
 <style>
 :root{
   --navy:#1F3462;
-  --navy-deep:#16274D;
   --orange:#FE6E2D;
-  --copper:#E08A45;
+  --orange-hot:#FF7A3C;
   --champagne:#EFD3A6;
   --champagne-2:#C9A473;
-  --cream:#F6F2E9;
-  --muted:#42517A;
+  --ink:#081231;
 }
 *{margin:0;padding:0;box-sizing:border-box}
-html,body{background:#0b0b0b}
+html,body{background:#05070f}
 body{
   font-family:'IBM Plex Sans Arabic','Tajawal',sans-serif;
   -webkit-font-smoothing:antialiased;text-rendering:geometricPrecision;
 }
-.slide{position:relative;width:1080px;height:1350px;overflow:hidden;margin:0 auto 40px;isolation:isolate}
+.slide{position:relative;width:1080px;height:1350px;overflow:hidden;margin:0 auto 40px;isolation:isolate;
+  background:linear-gradient(163deg,#2E549C 0%,#1D3A74 30%,#122A5E 62%,#081231 100%)}
 
 /* ---------- texture ---------- */
 .grain::after{
   content:'';position:absolute;inset:-20%;pointer-events:none;z-index:40;
   background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='240' height='240' filter='url(%23n)' opacity='0.5'/></svg>");
+  opacity:.05;mix-blend-mode:overlay;
 }
-.slide.dark .grain::after{opacity:.055;mix-blend-mode:overlay}
-.slide.light .grain::after{opacity:.055;mix-blend-mode:multiply}
-
-.vignette{position:absolute;inset:0;z-index:3;pointer-events:none}
-.slide.dark .vignette{
+.vignette{position:absolute;inset:0;z-index:3;pointer-events:none;
   background:
-    radial-gradient(120% 74% at 50% 14%, rgba(104,150,246,.26) 0%, rgba(0,0,0,0) 62%),
-    radial-gradient(112% 90% at 50% 50%, rgba(0,0,0,0) 52%, rgba(4,9,22,.50) 100%);
+    radial-gradient(120% 72% at 50% 12%, rgba(120,165,255,.28) 0%, rgba(0,0,0,0) 60%),
+    radial-gradient(112% 92% at 50% 52%, rgba(0,0,0,0) 55%, rgba(3,8,22,.46) 100%);
 }
-.slide.light .vignette{background:radial-gradient(118% 94% at 50% 40%, rgba(0,0,0,0) 58%, rgba(31,52,98,.055) 100%)}
 
 /* ---------- hairline frame ---------- */
-.frame{position:absolute;inset:42px;z-index:5;pointer-events:none}
-.frame i{position:absolute;inset:0;border:1px solid currentColor;opacity:.20}
+.frame{position:absolute;inset:42px;z-index:5;pointer-events:none;color:var(--champagne-2)}
+.frame i{position:absolute;inset:0;border:1px solid currentColor;opacity:.22}
 .frame b{position:absolute;width:58px;height:58px;display:block}
 .frame b::before,.frame b::after{content:'';position:absolute;background:currentColor;opacity:.9}
 .frame b::before{width:58px;height:1.6px}
@@ -50,8 +45,6 @@ body{
 .frame b.tr{top:0;right:0}.frame b.tr::before{top:0;right:0}.frame b.tr::after{top:0;right:0}
 .frame b.bl{bottom:0;left:0}.frame b.bl::before{bottom:0;left:0}.frame b.bl::after{bottom:0;left:0}
 .frame b.br{bottom:0;right:0}.frame b.br::before{bottom:0;right:0}.frame b.br::after{bottom:0;right:0}
-.slide.dark .frame{color:var(--champagne-2)}
-.slide.light .frame{color:rgba(31,52,98,.32)}
 
 /* ---------- foil ---------- */
 .foil{
@@ -64,25 +57,25 @@ body{
 }
 .rule{height:1px;flex:1;background:currentColor;opacity:.45}
 
-/* ================= DARK ================= */
-.slide.dark{background:linear-gradient(167deg,#315DA8 0%,#22407D 30%,#132A5C 64%,#070F2B 100%)}
-.arcmark{position:absolute;z-index:1;pointer-events:none;opacity:.042;color:#fff}
+/* ---------- logo-echo arc watermark ---------- */
+.arcmark{position:absolute;z-index:1;pointer-events:none;opacity:.05;color:#fff}
 .arcmark svg{display:block;width:100%;height:100%;overflow:visible}
-.d-wrap{position:relative;z-index:10;height:100%;display:flex;flex-direction:column;align-items:center;
-  padding:98px 88px 84px;text-align:center}
-.logo-w{height:92px;display:block}
-.logo-c{height:76px;display:block}
 
-.notice{display:flex;align-items:center;gap:26px;width:100%;color:var(--champagne-2);margin-top:46px}
+/* ================= HOOK / REVEAL layout ================= */
+.d-wrap{position:relative;z-index:10;height:100%;display:flex;flex-direction:column;align-items:center;
+  padding:96px 88px 84px;text-align:center}
+.logo-w{height:92px;display:block}
+
+.notice{display:flex;align-items:center;gap:26px;width:100%;color:var(--champagne-2);margin-top:44px}
 .notice .t{font-family:'Reem Kufi',sans-serif;font-weight:600;letter-spacing:.42em;font-size:29px;
   color:var(--champagne);white-space:nowrap;padding-right:.42em}
-.kicker{font-size:35px;font-weight:300;color:#C2CDE6;line-height:1.55;margin-top:38px}
+.kicker{font-size:35px;font-weight:300;color:#C9D5F2;line-height:1.55;margin-top:36px}
 
 /* redacted-name file card */
 .card{
-  margin-top:36px;background:linear-gradient(176deg,#FDFBF6,#EFE9DB);
+  margin-top:34px;background:linear-gradient(176deg,#FDFBF6,#EFE9DB);
   border-radius:9px;padding:26px 46px 34px;transform:rotate(-1.1deg);
-  box-shadow:0 32px 62px rgba(3,8,20,.55), inset 0 2px 0 rgba(255,255,255,.7);position:relative;
+  box-shadow:0 32px 62px rgba(2,6,18,.6), inset 0 2px 0 rgba(255,255,255,.7);position:relative;
 }
 .card::after{content:'';position:absolute;inset:8px;border:1px solid rgba(31,52,98,.22);border-radius:4px}
 .card .clab{font-family:'Reem Kufi',sans-serif;font-weight:600;font-size:20px;letter-spacing:.32em;
@@ -91,116 +84,123 @@ body{
 .nameline .nm{font-family:'Tajawal',sans-serif;font-weight:900;font-size:86px;color:var(--navy);line-height:1.2}
 .redact{width:270px;height:70px;display:block;flex:none}
 
-h1.hero{font-family:'Tajawal',sans-serif;font-weight:800;font-size:64px;line-height:1.34;color:#E7EEFF;margin-top:50px}
-h1.hero .big{display:block;font-weight:900;font-size:104px;line-height:1.16;margin-top:10px}
+h1.hero{font-family:'Tajawal',sans-serif;font-weight:800;font-size:64px;line-height:1.34;color:#EDF2FF;margin-top:48px}
+h1.hero .big{display:block;font-weight:900;font-size:104px;line-height:1.16;margin-top:10px;filter:drop-shadow(0 0 36px rgba(254,110,45,.38))}
 
 /* unpaid dossier stamp */
 .unpaid{
-  margin-top:58px;transform:rotate(-7.5deg);position:relative;
-  border:4px solid rgba(254,110,45,.78);border-radius:12px;
-  padding:14px 54px 18px;color:rgba(254,110,45,.92);
+  margin-top:54px;transform:rotate(-7.5deg);position:relative;
+  border:4px solid rgba(255,122,60,.85);border-radius:12px;
+  padding:14px 54px 18px;color:#FF8A4D;
   font-family:'Tajawal',sans-serif;font-weight:900;font-size:56px;letter-spacing:.06em;line-height:1.1;
-  box-shadow:0 0 0 3px rgba(254,110,45,.16) inset;
+  box-shadow:0 0 0 3px rgba(255,122,60,.18) inset, 0 0 44px rgba(254,110,45,.16);
 }
-.unpaid::after{content:'';position:absolute;inset:7px;border:2px solid rgba(254,110,45,.34);border-radius:6px}
+.unpaid::after{content:'';position:absolute;inset:7px;border:2px solid rgba(255,122,60,.38);border-radius:6px}
+
+/* forensic fingerprint */
+.finger{position:absolute;left:58px;top:548px;width:250px;height:315px;opacity:.17;
+  transform:rotate(-14deg);z-index:4;color:var(--champagne);pointer-events:none}
+.finger svg{width:100%;height:100%}
+
+/* case barcode strip */
+.case{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:16px;
+  direction:ltr;position:relative;z-index:2}
+.case .bars{width:190px;height:26px;display:block}
+.case .bars rect{fill:#26365F}
+.case span{font-family:'Tajawal',sans-serif;font-weight:700;font-size:20px;letter-spacing:.18em;color:#8791AC}
 
 .swipe{margin-top:auto;display:flex;flex-direction:column;align-items:center;gap:22px}
-.swipe .txt{font-weight:300;font-size:32px;color:#A6B4D4;letter-spacing:.03em}
+.swipe .txt{font-weight:300;font-size:32px;color:#AFBEE6;letter-spacing:.03em}
 .chev{display:flex;gap:10px;align-items:center}
 .chev span{width:20px;height:20px;border-left:4px solid var(--orange);border-bottom:4px solid var(--orange);
   transform:rotate(45deg);display:block}
 .chev span:nth-child(2){opacity:.6}.chev span:nth-child(3){opacity:.28}
 
-/* ================= LIGHT ================= */
-.slide.light{background:linear-gradient(172deg,#FFFEFA 0%,#FBF7EE 46%,#F4EEE0 100%)}
-.l-wrap{position:relative;z-index:10;height:100%;display:flex;flex-direction:column;align-items:center;
-  padding:96px 84px 214px;text-align:center}
-
-.ghostnum{position:absolute;z-index:2;font-family:'Tajawal',sans-serif;font-weight:900;
-  font-size:660px;line-height:.72;color:#B98A63;opacity:.085;direction:ltr;
-  left:50%;transform:translateX(-50%);top:250px;letter-spacing:-.06em;pointer-events:none}
+/* ================= EVIDENCE layout ================= */
+.e-wrap{position:relative;z-index:10;height:100%;display:flex;flex-direction:column;align-items:center;
+  padding:86px 84px 176px;text-align:center}
+.logo-e{height:60px;display:block}
 
 .tab{position:absolute;top:0;left:50%;transform:translateX(-50%);
-  background:linear-gradient(180deg,#2A4680,#1D3162);color:var(--champagne);
-  padding:16px 42px 18px;border-radius:0 0 18px 18px;
+  background:linear-gradient(180deg,#FF8F58,#F2571C);color:#fff;
+  padding:15px 42px 17px;border-radius:0 0 18px 18px;
   font-family:'Reem Kufi',sans-serif;font-weight:600;letter-spacing:.24em;font-size:25px;
-  box-shadow:0 14px 30px rgba(31,52,98,.30);z-index:20;padding-right:calc(42px + .24em)}
-.tab .num{color:#fff;direction:ltr;display:inline-block;letter-spacing:.10em}
+  box-shadow:0 14px 34px rgba(242,87,28,.38);z-index:20;padding-right:calc(42px + .24em)}
+.tab .num{direction:ltr;display:inline-block;letter-spacing:.10em;font-weight:700}
 
-.svc{display:flex;align-items:center;gap:24px;width:100%;color:var(--copper);margin-top:32px}
-.svc .t{font-family:'Reem Kufi',sans-serif;font-weight:600;letter-spacing:.26em;font-size:28px;
-  color:var(--orange);white-space:nowrap;padding-right:.26em}
+.svc{display:flex;align-items:center;gap:24px;width:100%;color:var(--champagne-2);margin-top:24px}
+.svc .t{font-family:'Reem Kufi',sans-serif;font-weight:600;letter-spacing:.26em;font-size:27px;
+  color:var(--champagne);white-space:nowrap;padding-right:.26em}
 
-.medallion{width:250px;height:250px;border-radius:50%;position:relative;display:grid;place-items:center;
-  margin-top:44px;flex:none;
-  color:#FF8A45;
-  background:radial-gradient(circle at 50% 28%, #2E4C8C 0%, #223B6E 52%, #16274C 100%);
-  box-shadow:0 26px 54px rgba(20,37,79,.34), 0 0 0 9px rgba(31,52,98,.055), inset 0 2px 0 rgba(255,255,255,.14)}
-.medallion::before{content:'';position:absolute;inset:14px;border-radius:50%;border:1.5px dashed rgba(239,211,166,.42)}
-.medallion svg{width:132px;height:132px;display:block}
+/* evidence photo / blueprint card */
+.shot{position:relative;width:100%;height:522px;margin-top:26px;flex:none;border-radius:18px;
+  overflow:hidden;background:linear-gradient(160deg,#162C60 0%,#0E2049 55%,#0A1839 100%);
+  box-shadow:0 30px 60px rgba(2,6,18,.55), 0 0 0 1.5px rgba(239,211,166,.25), inset 0 1px 0 rgba(255,255,255,.10)}
+.shot img{width:100%;height:100%;object-fit:cover;display:block}
+.shot .scene{position:absolute;inset:0;direction:ltr}
+.shot .scene svg{width:100%;height:100%;display:block}
+.shot .badge{position:absolute;top:16px;right:16px;z-index:3;direction:ltr;
+  background:linear-gradient(180deg,#FF8F58,#F2571C);color:#fff;
+  font-family:'Tajawal',sans-serif;font-weight:900;font-size:29px;letter-spacing:.06em;
+  padding:8px 20px 10px;border-radius:10px;box-shadow:0 10px 24px rgba(2,6,18,.5)}
 
-h1.head{font-family:'Tajawal',sans-serif;font-weight:800;color:var(--navy);
-  font-size:76px;line-height:1.28;margin-top:44px}
-p.sub{font-weight:400;color:var(--muted);font-size:33px;line-height:1.74;margin-top:26px;max-width:810px}
-p.sub b{color:var(--navy);font-weight:600}
+h1.head{font-family:'Tajawal',sans-serif;font-weight:800;color:#F6F9FF;
+  font-size:62px;line-height:1.28;margin-top:32px}
+p.sub{font-weight:400;color:#B7C5E6;font-size:29px;line-height:1.62;margin-top:14px;max-width:880px}
+p.sub b{color:#FFFFFF;font-weight:600}
 
-.ornament{margin-top:auto;display:flex;align-items:center;justify-content:center;gap:16px;width:100%;
-  color:rgba(31,52,98,.30);padding-bottom:34px}
-.ornament span{height:1px;flex:1;max-width:210px;background:currentColor}
-.ornament b{width:9px;height:9px;transform:rotate(45deg);background:var(--orange);opacity:.75;display:block}
+/* client-quote paper card */
+.quote{margin-top:auto;width:100%;position:relative;
+  background:linear-gradient(178deg,#FDFAF1,#F2EBD8);
+  border-right:7px solid var(--orange);
+  border-radius:8px 18px 18px 8px;padding:26px 36px 30px;text-align:right;
+  box-shadow:0 20px 44px rgba(2,6,18,.45), inset 0 1px 0 rgba(255,255,255,.8)}
+.quote .qwho{font-family:'Tajawal',sans-serif;font-weight:900;font-size:42px;letter-spacing:.01em;
+  color:#E8570E;line-height:1.15;display:block}
+.quote .qtxt{font-family:'Tajawal',sans-serif;font-weight:700;font-size:40px;line-height:1.42;
+  color:#17294F;margin-top:8px}
+.quote .mark{position:absolute;left:26px;bottom:0;font-family:'Amiri',serif;font-size:130px;
+  line-height:1;color:#17294F;opacity:.10}
 
-.quote{width:100%;position:relative;
-  background:linear-gradient(180deg,rgba(31,52,98,.085),rgba(31,52,98,.038));
-  border:1px solid rgba(31,52,98,.20);border-right:6px solid var(--orange);
-  border-radius:8px 20px 20px 8px;padding:30px 40px 34px;text-align:right}
-.quote .qlab{font-family:'Reem Kufi',sans-serif;font-weight:600;font-size:22px;letter-spacing:.24em;
-  color:var(--orange);padding-right:.24em}
-.quote .qtxt{font-family:'Tajawal',sans-serif;font-weight:700;font-size:42px;line-height:1.46;
-  color:var(--navy);margin-top:12px}
-.quote .mark{position:absolute;left:30px;bottom:6px;font-family:'Amiri',serif;font-size:158px;
-  line-height:1;color:var(--navy);opacity:.10}
-
-.dots{position:absolute;bottom:196px;left:0;right:0;direction:ltr;display:flex;justify-content:center;gap:12px;z-index:16}
-.dots i{width:9px;height:9px;border-radius:50%;background:rgba(31,52,98,.34)}
-.dots i.on{background:var(--orange);width:32px;border-radius:6px}
-
-.band{position:absolute;bottom:0;left:0;right:0;height:172px;z-index:15;
-  background:linear-gradient(100deg,#1E3565 0%,#254280 52%,#192D5C 100%);
+/* verdict band */
+.band{position:absolute;bottom:0;left:0;right:0;height:150px;z-index:15;
+  background:linear-gradient(100deg,#0A173B 0%,#0D1E4A 52%,#071129 100%);
   display:flex;align-items:center;justify-content:center}
 .band::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;
-  background:linear-gradient(90deg,transparent,var(--orange) 20%,var(--champagne) 50%,var(--orange) 80%,transparent);opacity:.92}
-.band::after{content:'';position:absolute;inset:0;
-  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='240' height='240' filter='url(%23n)' opacity='0.5'/></svg>");
-  opacity:.10;mix-blend-mode:overlay;pointer-events:none}
-.stamp{display:flex;align-items:center;gap:16px;padding:15px 40px;border:2.5px solid currentColor;
-  border-radius:14px;font-family:'Tajawal',sans-serif;font-weight:800;font-size:42px;position:relative;z-index:2}
-.stamp svg{width:38px;height:38px;flex:none}
+  background:linear-gradient(90deg,transparent,var(--orange) 20%,var(--champagne) 50%,var(--orange) 80%,transparent);opacity:.95}
+.stamp{display:flex;align-items:center;gap:14px;padding:12px 34px;border:2.5px solid currentColor;
+  border-radius:13px;font-family:'Tajawal',sans-serif;font-weight:800;font-size:37px;position:relative;z-index:2}
+.stamp svg{width:33px;height:33px;flex:none}
 .stamp.yes{color:var(--champagne);transform:rotate(-2deg)}
-.stamp.no{color:var(--orange);transform:rotate(1.8deg)}
-.band .sep{width:1px;height:78px;background:rgba(239,211,166,.28);margin:0 44px;position:relative;z-index:2}
+.stamp.no{color:var(--orange-hot);transform:rotate(1.8deg)}
+.band .sep{width:1px;height:66px;background:rgba(239,211,166,.28);margin:0 44px;position:relative;z-index:2}
 
-/* ================= SLIDE 7 ================= */
-.reveal-k{font-weight:300;font-size:39px;color:#ABBAD9;margin-top:44px;letter-spacing:.02em}
-h1.reveal{font-family:'Tajawal',sans-serif;font-weight:900;font-size:88px;line-height:1.24;margin-top:14px}
-.reveal-s{font-weight:400;font-size:34px;line-height:1.68;color:#C4CFE7;margin-top:30px;max-width:840px}
+/* ================= REVEAL ================= */
+.reveal-k{font-weight:300;font-size:39px;color:#B4C2E4;margin-top:44px;letter-spacing:.02em}
+h1.reveal{font-family:'Tajawal',sans-serif;font-weight:900;font-size:88px;line-height:1.24;margin-top:14px;
+  filter:drop-shadow(0 8px 44px rgba(233,196,138,.30))}
+.halo{position:absolute;top:190px;left:50%;transform:translateX(-50%);width:1000px;height:580px;
+  border-radius:50%;z-index:2;pointer-events:none;
+  background:radial-gradient(closest-side,rgba(254,110,45,.15),rgba(233,196,138,.06) 55%,transparent 78%)}
+.reveal-s{font-weight:400;font-size:34px;line-height:1.68;color:#CBD6EF;margin-top:30px;max-width:840px}
 .reveal-s b{color:#fff;font-weight:600}
 .chips{display:flex;flex-wrap:wrap;justify-content:center;gap:13px;margin-top:36px}
 .chips span{font-family:'Reem Kufi',sans-serif;font-weight:500;font-size:26px;letter-spacing:.10em;
-  color:var(--champagne);border:1px solid rgba(239,211,166,.40);padding:12px 30px;border-radius:999px;
-  background:rgba(239,211,166,.05);padding-right:calc(30px + .10em)}
-.tagline{font-family:'Tajawal',sans-serif;font-weight:700;font-size:35px;color:#E9EFFF;margin-top:36px;line-height:1.48}
+  color:var(--champagne);border:1px solid rgba(239,211,166,.42);padding:12px 30px;border-radius:999px;
+  background:rgba(239,211,166,.06);padding-right:calc(30px + .10em)}
+.tagline{font-family:'Tajawal',sans-serif;font-weight:700;font-size:35px;color:#EDF2FF;margin-top:36px;line-height:1.48}
 .cta{margin-top:auto;width:100%;display:flex;flex-direction:column;align-items:center}
 .btn{display:block;width:100%;text-align:center;
   background:linear-gradient(96deg,#FF8F58 0%,#FE6E2D 52%,#EF541A 100%);color:#fff;
   font-family:'Tajawal',sans-serif;font-weight:900;font-size:54px;padding:32px 40px 38px;border-radius:22px;
-  box-shadow:0 22px 48px rgba(254,110,45,.36), inset 0 2px 0 rgba(255,255,255,.32)}
-.cta .fine{font-weight:300;font-size:27px;color:#B3C2E0;margin-top:20px;line-height:1.6}
+  box-shadow:0 22px 48px rgba(254,110,45,.42), inset 0 2px 0 rgba(255,255,255,.32)}
+.cta .fine{font-weight:300;font-size:27px;color:#B4C2E4;margin-top:20px;line-height:1.6}
 .phone{display:flex;align-items:center;justify-content:center;gap:16px;
   font-family:'Tajawal',sans-serif;font-weight:800;font-size:46px;color:var(--champagne);
   margin-top:16px;letter-spacing:.05em;direction:ltr}
 .phone svg{width:38px;height:38px;flex:none;opacity:.9}
 .meta{display:flex;align-items:center;justify-content:center;gap:22px;margin-top:18px;
-  font-size:26px;font-weight:400;color:#AEBDDC}
+  font-size:26px;font-weight:400;color:#B6C4E4}
 .meta span{display:flex;align-items:center;gap:11px;white-space:nowrap}
 .meta svg{width:25px;height:25px;flex:none;color:var(--orange);opacity:.95}
 .meta i{direction:ltr;font-style:normal;letter-spacing:.02em}
@@ -210,10 +210,11 @@ h1.reveal{font-family:'Tajawal',sans-serif;font-weight:900;font-size:88px;line-h
 <body>
 
 <!-- ===================== 1 · HOOK ===================== -->
-<section class="slide dark grain" id="s1">
+<section class="slide grain" id="s1">
   <div class="arcmark" style="width:1560px;height:830px;left:-240px;bottom:-170px"></div>
   <div class="vignette"></div>
   <div class="frame"><i></i><b class="tl"></b><b class="tr"></b><b class="bl"></b><b class="br"></b></div>
+  <div class="finger" id="finger"></div>
   <div class="d-wrap">
     <img class="logo-w" src="./logo-white.png" alt="AL RAZANA">
     <div class="notice"><span class="rule"></span><span class="t">تنويــه</span><span class="rule"></span></div>
@@ -229,6 +230,10 @@ h1.reveal{font-family:'Tajawal',sans-serif;font-weight:900;font-size:88px;line-h
           <path d="M10,52 C74,60 132,46 194,58 C228,64 250,54 262,57" stroke="#0A1122" stroke-width="17" stroke-linecap="round" fill="none"/>
           <path d="M16,36 C80,28 128,44 190,34 C226,28 248,38 258,34" stroke="#0A1122" stroke-width="26" stroke-linecap="round" fill="none"/>
         </svg>
+      </div>
+      <div class="case">
+        <svg class="bars" viewBox="0 0 220 26" preserveAspectRatio="none" id="barcode"></svg>
+        <span>CASE 114-08 · SHJ</span>
       </div>
     </div>
 
@@ -247,121 +252,107 @@ h1.reveal{font-family:'Tajawal',sans-serif;font-weight:900;font-size:88px;line-h
 </section>
 
 <!-- ===================== 2-6 · EVIDENCE ===================== -->
-<section class="slide light grain" id="s2">
+<section class="slide grain" id="s2">
   <div class="vignette"></div>
   <div class="frame"><i></i><b class="tl"></b><b class="tr"></b><b class="bl"></b><b class="br"></b></div>
   <div class="tab">الدليــل <span class="num">01</span></div>
-  <div class="ghostnum">01</div>
-  <div class="l-wrap">
-    <img class="logo-c" src="./logo.png" alt="AL RAZANA">
+  <div class="e-wrap">
+    <img class="logo-e" src="./logo-white.png" alt="AL RAZANA">
     <div class="svc"><span class="rule"></span><span class="t">التصميم والاستشارة</span><span class="rule"></span></div>
-    <div class="medallion" data-icon="design"></div>
-    <h1 class="head">صمّمنا له المطبخ<br>من الصفر</h1>
+    <figure class="shot" data-shot="design"></figure>
+    <h1 class="head">صمّمنا له المطبخ من الصفر</h1>
     <p class="sub">مخطط كامل بالمليمتر — حركة الشيفات، التهوية، والمساحات.<br><b>قبل ما يشتري ولا جهاز.</b></p>
-    <div class="ornament"><span></span><b></b><span></span></div>
     <div class="quote">
-      <div class="qlab">وعــده وقتهــا</div>
+      <span class="qwho">خالد:</span>
       <div class="qtxt">«الدفعة أول ما نخلّص التصميم»</div>
       <div class="mark">”</div>
     </div>
   </div>
-  <div class="dots"><i></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i></div>
   <div class="band"></div>
 </section>
 
-<section class="slide light grain" id="s3">
+<section class="slide grain" id="s3">
   <div class="vignette"></div>
   <div class="frame"><i></i><b class="tl"></b><b class="tr"></b><b class="bl"></b><b class="br"></b></div>
   <div class="tab">الدليــل <span class="num">02</span></div>
-  <div class="ghostnum">02</div>
-  <div class="l-wrap">
-    <img class="logo-c" src="./logo.png" alt="AL RAZANA">
+  <div class="e-wrap">
+    <img class="logo-e" src="./logo-white.png" alt="AL RAZANA">
     <div class="svc"><span class="rule"></span><span class="t">التوريــد</span><span class="rule"></span></div>
-    <div class="medallion" data-icon="supply"></div>
-    <h1 class="head">وصّلنا له المعدات<br>كاملة</h1>
-    <p class="sub">طبخ، تحضير، وتبريد — وكالات أوروبية معتمدة،<br><b>وكل قطعة بضمانها.</b></p>
-    <div class="ornament"><span></span><b></b><span></span></div>
+    <figure class="shot" data-shot="supply"></figure>
+    <h1 class="head">وصّلنا له المعدات كاملة</h1>
+    <p class="sub">طبخ، تحضير، وتبريد — وكالات أوروبية معتمدة، <b>وكل قطعة بضمانها.</b></p>
     <div class="quote">
-      <div class="qlab">وعــده وقتهــا</div>
+      <span class="qwho">خالد:</span>
       <div class="qtxt">«أول ما توصل البضاعة، على طول»</div>
       <div class="mark">”</div>
     </div>
   </div>
-  <div class="dots"><i></i><i></i><i class="on"></i><i></i><i></i><i></i><i></i></div>
   <div class="band"></div>
 </section>
 
-<section class="slide light grain" id="s4">
+<section class="slide grain" id="s4">
   <div class="vignette"></div>
   <div class="frame"><i></i><b class="tl"></b><b class="tr"></b><b class="bl"></b><b class="br"></b></div>
   <div class="tab">الدليــل <span class="num">03</span></div>
-  <div class="ghostnum">03</div>
-  <div class="l-wrap">
-    <img class="logo-c" src="./logo.png" alt="AL RAZANA">
+  <div class="e-wrap">
+    <img class="logo-e" src="./logo-white.png" alt="AL RAZANA">
     <div class="svc"><span class="rule"></span><span class="t">التصنيــع</span><span class="rule"></span></div>
-    <div class="medallion" data-icon="fabricate"></div>
-    <h1 class="head">صنّعنا له الستانلس<br>على مقاسه</h1>
-    <p class="sub">طاولات، مغاسل، وأرفف — بمصنعنا،<br><b>على مخططه بالضبط.</b></p>
-    <div class="ornament"><span></span><b></b><span></span></div>
+    <figure class="shot" data-shot="fabricate"></figure>
+    <h1 class="head">صنّعنا له الستانلس على مقاسه</h1>
+    <p class="sub">طاولات، مغاسل، وأرفف — بمصنعنا، <b>على مخططه بالضبط.</b></p>
     <div class="quote">
-      <div class="qlab">وعــده وقتهــا</div>
+      <span class="qwho">خالد:</span>
       <div class="qtxt">«الشيك جاهز، بس المدير مسافر»</div>
       <div class="mark">”</div>
     </div>
   </div>
-  <div class="dots"><i></i><i></i><i></i><i class="on"></i><i></i><i></i><i></i></div>
   <div class="band"></div>
 </section>
 
-<section class="slide light grain" id="s5">
+<section class="slide grain" id="s5">
   <div class="vignette"></div>
   <div class="frame"><i></i><b class="tl"></b><b class="tr"></b><b class="bl"></b><b class="br"></b></div>
   <div class="tab">الدليــل <span class="num">04</span></div>
-  <div class="ghostnum">04</div>
-  <div class="l-wrap">
-    <img class="logo-c" src="./logo.png" alt="AL RAZANA">
+  <div class="e-wrap">
+    <img class="logo-e" src="./logo-white.png" alt="AL RAZANA">
     <div class="svc"><span class="rule"></span><span class="t">التركيب والتشغيل</span><span class="rule"></span></div>
-    <div class="medallion" data-icon="install"></div>
-    <h1 class="head">ركّبنا وشغّلنا<br>المطبخ</h1>
-    <p class="sub">شبكنا الغاز والكهربا والصرف،<br><b>وسلّمناه جاهز للخدمة من أول يوم.</b></p>
-    <div class="ornament"><span></span><b></b><span></span></div>
+    <figure class="shot" data-shot="install"></figure>
+    <h1 class="head">ركّبنا وشغّلنا المطبخ</h1>
+    <p class="sub">شبكنا الغاز والكهربا والصرف، <b>وسلّمناه جاهز للخدمة من أول يوم.</b></p>
     <div class="quote">
-      <div class="qlab">وعــده وقتهــا</div>
+      <span class="qwho">خالد:</span>
       <div class="qtxt">«بعد الافتتاح مباشرة، وعد»</div>
       <div class="mark">”</div>
     </div>
   </div>
-  <div class="dots"><i></i><i></i><i></i><i></i><i class="on"></i><i></i><i></i></div>
   <div class="band"></div>
 </section>
 
-<section class="slide light grain" id="s6">
+<section class="slide grain" id="s6">
   <div class="vignette"></div>
   <div class="frame"><i></i><b class="tl"></b><b class="tr"></b><b class="bl"></b><b class="br"></b></div>
   <div class="tab">الدليــل <span class="num">05</span></div>
-  <div class="ghostnum">05</div>
-  <div class="l-wrap">
-    <img class="logo-c" src="./logo.png" alt="AL RAZANA">
+  <div class="e-wrap">
+    <img class="logo-e" src="./logo-white.png" alt="AL RAZANA">
     <div class="svc"><span class="rule"></span><span class="t">الصيانة وقطع الغيار</span><span class="rule"></span></div>
-    <div class="medallion" data-icon="service"></div>
-    <h1 class="head">وحتى بعد ما فتح...<br>ما تركناه</h1>
-    <p class="sub">صيانة وقطع غيار توصله نفس اليوم — لأن مطبخ<br><b>يوقف يوم واحد يعني خسارة ما تتعوّض.</b></p>
-    <div class="ornament"><span></span><b></b><span></span></div>
+    <figure class="shot" data-shot="service"></figure>
+    <h1 class="head">وحتى بعد ما فتح... ما تركناه</h1>
+    <p class="sub">صيانة وقطع غيار توصله نفس اليوم —<br>لأن مطبخ <b>يوقف يوم واحد يعني خسارة ما تتعوّض.</b></p>
     <div class="quote">
-      <div class="qlab">وعــده الأخيــر</div>
+      <span class="qwho">خالد، آخر مرة:</span>
       <div class="qtxt">«والله ناسي... أرسل لي الآيبان»</div>
       <div class="mark">”</div>
     </div>
   </div>
-  <div class="dots"><i></i><i></i><i></i><i></i><i></i><i class="on"></i><i></i></div>
   <div class="band"></div>
 </section>
 
 <!-- ===================== 7 · REVEAL ===================== -->
-<section class="slide dark grain" id="s7">
+<section class="slide grain" id="s7">
   <div class="arcmark" style="width:1560px;height:830px;left:-240px;bottom:-190px"></div>
   <div class="vignette"></div>
   <div class="frame"><i></i><b class="tl"></b><b class="tr"></b><b class="bl"></b><b class="br"></b></div>
+  <div class="halo"></div>
   <div class="d-wrap" style="padding-top:92px">
     <img class="logo-w" src="./logo-white.png" alt="AL RAZANA">
     <div class="reveal-k">طيب... ليش ما دفع؟</div>
@@ -394,7 +385,7 @@ h1.reveal{font-family:'Tajawal',sans-serif;font-weight:900;font-size:88px;line-h
 <script>
 const NS='http://www.w3.org/2000/svg';
 
-/* logo-inspired arc watermark (dark slides only) */
+/* logo-inspired arc watermark (hook + reveal) */
 document.querySelectorAll('.arcmark').forEach(el=>{
   const s=document.createElementNS(NS,'svg');
   s.setAttribute('viewBox','0 0 400 220');
@@ -408,49 +399,266 @@ document.querySelectorAll('.arcmark').forEach(el=>{
   el.appendChild(s);
 });
 
-/* service line-art icons */
-const ICONS={
-  design:`<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M14 14h72M14 10v8M86 10v8" stroke-width="2.4" opacity=".55"/>
-    <rect x="16" y="28" width="68" height="54" rx="4"/>
-    <path d="M16 44h28M44 28v54M60 44h24M60 64h24"/>
-    <circle cx="72" cy="54" r="6.5"/>
-    <path d="M23 56h14M30 51v10" opacity=".85"/>
-  </svg>`,
-  supply:`<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M52 18 82 31v32L52 76 22 63V31z"/>
-    <path d="M22 31l30 13 30-13M52 44v32"/>
-    <path d="M37 24l30 13" opacity=".5"/>
-    <path d="M14 40H3M17 52H6M15 64H4" stroke-width="2.8" opacity=".68"/>
-  </svg>`,
-  fabricate:`<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M16 56h68M22 56v26M78 56v26M34 56v13M66 56v13"/>
-    <path d="M20 47h60a4 4 0 0 1 4 4v5H16v-5a4 4 0 0 1 4-4z"/>
-    <path d="M50 40V24M42 30l8-8 8 8"/>
-    <path d="M33 20l-4-7M67 20l4-7M50 15V7" stroke-width="2.6" opacity=".6"/>
-  </svg>`,
-  install:`<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M22 16h56" stroke-width="2.6" opacity=".55"/>
-    <rect x="20" y="26" width="60" height="46" rx="5"/>
-    <circle cx="37" cy="41" r="6.5"/><circle cx="63" cy="41" r="6.5"/>
-    <circle cx="37" cy="58" r="6.5"/><circle cx="63" cy="58" r="6.5"/>
-    <path d="M88 90 74 76" stroke-width="4"/>
-    <path d="M74 76a9 9 0 0 1 11-11l-6 6 5 5 6-6a9 9 0 0 1-11 11z"/>
-  </svg>`,
-  service:`<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round">
-    <g stroke-width="7" stroke-linecap="butt">
-      <path d="M42 20v8M42 64v8M64 42h-8M28 42h-8M57.6 26.4l-5.6 5.6M32 52l-5.6 5.6M57.6 57.6l-5.6-5.6M32 32l-5.6-5.6"/>
-    </g>
-    <circle cx="42" cy="42" r="19"/><circle cx="42" cy="42" r="7"/>
-    <g stroke-width="5.6" stroke-linecap="butt">
-      <path d="M72 56v5M72 83v5M86 70h-5M63 70h-5M82.6 59.4l-3.6 3.6M65.4 76.6l-3.6 3.6M82.6 80.6l-3.6-3.6M65.4 63.4l-3.6-3.6"/>
-    </g>
-    <circle cx="72" cy="70" r="11.5"/><circle cx="72" cy="70" r="4"/>
-  </svg>`
-};
-document.querySelectorAll('.medallion').forEach(m=>{m.innerHTML=ICONS[m.dataset.icon]||''});
+/* ---------------------------------------------------------------
+   EVIDENCE VISUALS — technical blueprint art, drawn in brand colours.
+   Drop a real photo into photos/NN-key.jpg and it replaces the art
+   automatically on the next render. 1800×928 px or larger, landscape.
+   --------------------------------------------------------------- */
+const C={ln:'#E9D2A4', hot:'#FF7A3C', dim:'rgba(233,210,164,.85)'};
+const GRID=(id)=>`<defs><pattern id="${id}" width="90" height="90" patternUnits="userSpaceOnUse">
+  <path d="M90 0H0V90" fill="none" stroke="${C.ln}" stroke-opacity=".085" stroke-width="2"/></pattern></defs>
+  <rect width="1800" height="928" fill="url(#${id})"/>
+  <g stroke="${C.ln}" stroke-width="3" opacity=".5" fill="none">
+    <path d="M56 92V56h36M1744 92V56h-36M56 836v36h36M1744 836v36h-36"/>
+  </g>
+  <text x="122" y="882" font-size="21" fill="${C.dim}" opacity=".5" letter-spacing="5" font-family="Tajawal">AL RAZANA — TECHNICAL FILE</text>
+  <text x="1678" y="882" text-anchor="end" font-size="21" fill="${C.dim}" opacity=".5" letter-spacing="5" font-family="Tajawal">SCALE 1:50</text>`;
 
-/* crisp stamp pair in every evidence band */
+const SCENES={
+/* 01 — kitchen floor plan */
+design:`<svg viewBox="0 0 1800 928" font-family="Tajawal">
+${GRID('gp1')}
+<g fill="none" stroke="${C.ln}" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M330 790 V150 H1470 V790 H680"/><path d="M520 790 H330"/>
+</g>
+<g fill="none" stroke="${C.ln}" stroke-width="2.5" opacity=".45">
+  <path d="M352 768 V172 H1448 V768 H692"/><path d="M508 768 H352"/>
+</g>
+<g fill="none" stroke="${C.hot}" stroke-width="5" stroke-linecap="round">
+  <path d="M680 790 V632"/>
+  <path d="M680 632 A158 158 0 0 0 522 790" stroke-dasharray="10 14" stroke-width="4"/>
+</g>
+<g fill="none" stroke="${C.ln}" stroke-width="5">
+  <rect x="352" y="172" width="1096" height="108"/>
+  <rect x="352" y="280" width="112" height="420"/>
+</g>
+<g fill="none" stroke="${C.ln}" stroke-width="2" opacity=".35">
+  <path d="M470 172 L362 280 M610 172 L502 280 M750 172 L642 280 M890 172 L782 280 M1030 172 L922 280 M1170 172 L1062 280 M1310 172 L1202 280 M1430 172 L1322 280"/>
+  <path d="M352 356 L464 468 M352 476 L464 588 M352 596 L464 700"/>
+</g>
+<g fill="none" stroke="${C.ln}" stroke-width="4">
+  <rect x="374" y="380" width="68" height="120" rx="10"/><circle cx="408" cy="360" r="7"/>
+</g>
+<rect x="740" y="430" width="440" height="190" rx="8" fill="none" stroke="${C.hot}" stroke-width="7"/>
+<g fill="none" stroke="${C.ln}" stroke-width="4">
+  <circle cx="822" cy="492" r="30"/><circle cx="908" cy="492" r="30"/><circle cx="822" cy="566" r="30"/><circle cx="908" cy="566" r="30"/>
+  <circle cx="822" cy="492" r="12"/><circle cx="908" cy="492" r="12"/><circle cx="822" cy="566" r="12"/><circle cx="908" cy="566" r="12"/>
+  <rect x="1000" y="468" width="146" height="116" rx="10"/><circle cx="1038" cy="526" r="6"/><circle cx="1108" cy="526" r="6"/>
+</g>
+<rect x="770" y="316" width="380" height="86" fill="none" stroke="${C.ln}" stroke-width="4" stroke-dasharray="14 12" opacity=".85"/>
+<path d="M900 402 V430" stroke="${C.ln}" stroke-width="3" stroke-dasharray="6 8" opacity=".7" fill="none"/>
+<g stroke="${C.ln}" stroke-width="3" opacity=".9" fill="none">
+  <path d="M330 96 H1470 M330 80 V112 M1470 80 V112 M358 88 330 96 358 104 M1442 88 1470 96 1442 104"/>
+  <path d="M1560 150 V790 M1544 150 H1576 M1544 790 H1576 M1552 178 1560 150 1568 178 M1552 762 1560 790 1568 762"/>
+</g>
+<text x="900" y="66" text-anchor="middle" font-size="36" fill="${C.dim}">6000</text>
+<text x="1610" y="480" font-size="36" fill="${C.dim}">3250</text>
+</svg>`,
+
+/* 02 — crates & delivery */
+supply:`<svg viewBox="0 0 1800 928" font-family="Tajawal">
+${GRID('gp2')}
+<path d="M300 762 H1520" stroke="${C.ln}" stroke-width="4" opacity=".55" fill="none"/>
+<g fill="none" stroke="${C.ln}" stroke-width="5" stroke-linejoin="round">
+  <path d="M470 762 v34 h1020 v-34 M470 796 h1020 M540 762 v34 M760 762 v34 M1040 762 v34 M1250 762 v34 M1420 762 v34"/>
+</g>
+<g fill="none" stroke="${C.ln}" stroke-width="6" stroke-linejoin="round">
+  <rect x="500" y="430" width="262" height="332" rx="6"/>
+  <path d="M500 430 762 762 M762 430 500 762"/>
+  <path d="M500 480 h40 M722 480 h40 M500 712 h40 M722 712 h40"/>
+</g>
+<g fill="none" stroke="${C.ln}" stroke-width="6" stroke-linejoin="round">
+  <rect x="806" y="300" width="340" height="462" rx="6"/>
+  <path d="M891 300 V762 M976 300 V762 M1061 300 V762" stroke-width="3" opacity=".5"/>
+</g>
+<g stroke="${C.hot}" stroke-width="10" fill="none">
+  <path d="M806 420 H1146 M806 640 H1146"/>
+</g>
+<text x="976" y="722" text-anchor="middle" font-size="34" fill="${C.dim}" letter-spacing="4">AR-114</text>
+<g fill="none" stroke="${C.ln}" stroke-width="6" stroke-linejoin="round">
+  <rect x="1190" y="384" width="282" height="378" rx="6"/>
+  <path d="M1190 384 L1258 320 L1540 320 L1472 384" opacity=".8"/>
+</g>
+<g fill="none" stroke="${C.hot}" stroke-width="6" stroke-linejoin="round">
+  <rect x="1252" y="452" width="160" height="310" rx="8"/>
+  <path d="M1252 560 h160 M1288 500 v-16 M1288 620 v-16"/>
+</g>
+<g stroke="${C.hot}" stroke-width="8" stroke-linecap="round" fill="none" opacity=".9">
+  <path d="M360 500 h74 M330 570 h104 M360 640 h74"/>
+</g>
+<g fill="none" stroke="${C.ln}" stroke-width="5" stroke-linecap="round">
+  <path d="M976 88 V192"/>
+</g>
+<path d="M976 192 a32 32 0 1 0 32 32" stroke="${C.hot}" stroke-width="7" fill="none" stroke-linecap="round"/>
+</svg>`,
+
+/* 03 — stainless fabrication drawing */
+fabricate:`<svg viewBox="0 0 1800 928" font-family="Tajawal">
+${GRID('gp3')}
+<g fill="none" stroke="${C.ln}" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M430 330 v-78 h940 v78"/>
+  <rect x="430" y="330" width="940" height="46" rx="6"/>
+  <path d="M472 376 v330 M506 376 v330 M1294 376 v330 M1328 376 v330"/>
+  <rect x="472" y="560" width="856" height="30" rx="4"/>
+</g>
+<g fill="none" stroke="${C.ln}" stroke-width="4" opacity=".55">
+  <path d="M700 376 v184 M1100 376 v184" stroke-dasharray="10 12"/>
+</g>
+<g fill="none" stroke="${C.ln}" stroke-width="5">
+  <circle cx="489" cy="726" r="16"/><circle cx="1311" cy="726" r="16"/>
+  <path d="M473 742 h32 M1295 742 h32"/>
+</g>
+<g stroke="${C.hot}" stroke-width="5" stroke-linecap="round" fill="none">
+  <path d="M496 366 l54 18 M540 420 l-18 -54 M522 344 l-2 62 M474 388 l62 2"/>
+  <circle cx="522" cy="392" r="10"/>
+</g>
+<g fill="none" stroke="${C.hot}" stroke-width="5">
+  <circle cx="1520" cy="286" r="140" stroke-dasharray="14 12"/>
+  <path d="M1418 380 L1370 330" stroke-width="3"/>
+</g>
+<path d="M1450 340 v-96 a24 24 0 0 1 24 -24 h96" stroke="${C.ln}" stroke-width="7" fill="none"/>
+<path d="M1450 244 a120 120 0 0 1 120 -120" stroke="${C.hot}" stroke-width="4" stroke-dasharray="8 10" fill="none"/>
+<text x="1502" y="326" font-size="34" fill="${C.dim}">R10</text>
+<g stroke="${C.ln}" stroke-width="3" opacity=".9" fill="none">
+  <path d="M430 800 H1370 M430 784 V816 M1370 784 V816 M458 792 430 800 458 808 M1342 792 1370 800 1342 808"/>
+  <path d="M1440 376 V706 M1424 376 H1456 M1424 706 H1456 M1432 404 1440 376 1448 404 M1432 678 1440 706 1448 678"/>
+</g>
+<text x="900" y="856" text-anchor="middle" font-size="36" fill="${C.dim}">2400</text>
+<text x="1476" y="552" font-size="36" fill="${C.dim}">850</text>
+</svg>`,
+
+/* 04 — range install & hookup */
+install:`<svg viewBox="0 0 1800 928" font-family="Tajawal">
+${GRID('gp4')}
+<path d="M300 780 H1520" stroke="${C.ln}" stroke-width="4" opacity=".55" fill="none"/>
+<g fill="none" stroke="${C.ln}" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="620" y="300" width="540" height="480" rx="10"/>
+  <path d="M620 392 h540"/>
+  <rect x="668" y="430" width="444" height="310" rx="10"/>
+  <path d="M700 470 h380" stroke-width="9"/>
+  <circle cx="890" cy="596" r="74"/>
+  <circle cx="890" cy="596" r="52" stroke-width="4" opacity=".6"/>
+</g>
+<g fill="none" stroke="${C.ln}" stroke-width="5">
+  <circle cx="700" cy="346" r="23"/><circle cx="790" cy="346" r="23"/><circle cx="990" cy="346" r="23"/><circle cx="1080" cy="346" r="23"/>
+  <path d="M700 332 v14 M790 332 v14 M990 332 v14 M1080 332 v14"/>
+</g>
+<g fill="none" stroke="${C.ln}" stroke-width="6" stroke-linecap="round">
+  <path d="M620 300 v-44 h540 v44"/>
+</g>
+<circle cx="866" cy="278" r="8" fill="${C.hot}"/><circle cx="914" cy="278" r="8" fill="${C.hot}"/>
+<g fill="none" stroke="${C.ln}" stroke-width="7" stroke-linecap="round">
+  <path d="M1420 120 V470 a30 30 0 0 1 -30 30 H1160"/>
+  <path d="M1386 300 h68 M1386 320 h68" stroke-width="5"/>
+</g>
+<g stroke="${C.hot}" stroke-width="7" fill="none" stroke-linecap="round">
+  <circle cx="1420" cy="404" r="26"/><path d="M1420 378 l40 -40"/>
+</g>
+<g stroke="${C.hot}" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M1258 560 l74 -74"/>
+  <path d="M1332 486 a30 30 0 1 1 42 -42 l-24 24 20 20 24 -24 a30 30 0 1 1 -42 42"/>
+  <circle cx="1240" cy="578" r="26" stroke-width="5"/>
+</g>
+<g fill="none" stroke="${C.ln}" stroke-width="5" stroke-linecap="round">
+  <rect x="380" y="360" width="74" height="98" rx="10"/>
+  <circle cx="417" cy="392" r="6" fill="${C.ln}"/><circle cx="417" cy="426" r="6" fill="${C.ln}"/>
+  <path d="M417 458 C417 560 520 600 620 620"/>
+</g>
+<text x="352" y="332" font-size="30" fill="${C.dim}">230V</text>
+<g fill="none" stroke="${C.ln}" stroke-width="5">
+  <rect x="760" y="220" width="260" height="36" rx="8"/>
+</g>
+<circle cx="890" cy="238" r="9" fill="none" stroke="${C.hot}" stroke-width="5"/>
+</svg>`,
+
+/* 05 — service / spare parts */
+service:`<svg viewBox="0 0 1800 928" font-family="Tajawal">
+${GRID('gp5')}
+<g stroke="${C.ln}" stroke-width="26" stroke-linecap="butt" fill="none">
+  <path d="M760 258 v52 M760 618 v52 M972 464 h-52 M548 464 h52
+           M910 314 l-37 37 M610 614 l37 -37 M910 614 l-37 -37 M610 314 l37 37"/>
+</g>
+<g fill="none" stroke="${C.ln}" stroke-width="8">
+  <circle cx="760" cy="464" r="150"/><circle cx="760" cy="464" r="58"/>
+</g>
+<circle cx="760" cy="464" r="24" fill="none" stroke="${C.hot}" stroke-width="7"/>
+<g stroke="${C.ln}" stroke-width="16" stroke-linecap="butt" fill="none" opacity=".9">
+  <path d="M1012 180 v30 M1012 400 v30 M1138 305 h-30 M886 305 h30
+           M1100 217 l-21 21 M924 393 l21 -21 M1100 393 l-21 -21 M924 217 l21 21"/>
+</g>
+<circle cx="1012" cy="305" r="88" fill="none" stroke="${C.ln}" stroke-width="7"/>
+<circle cx="1012" cy="305" r="30" fill="none" stroke="${C.ln}" stroke-width="5"/>
+<g stroke="${C.hot}" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M1218 700 L1466 452"/>
+  <path d="M1466 452 a44 44 0 1 0 62 -62 l-34 34 -28 -28 34 -34 a44 44 0 0 0 -62 62"/>
+  <circle cx="1200" cy="718" r="30" stroke-width="5"/>
+</g>
+<path d="M400 160 V768" stroke="${C.ln}" stroke-width="3" stroke-dasharray="10 14" opacity=".6" fill="none"/>
+<g fill="none" stroke="${C.ln}" stroke-width="5" stroke-linecap="round">
+  <circle cx="400" cy="220" r="40"/><path d="M400 196 v24 h16"/>
+  <path d="M370 360 h60 M370 360 l12 -22 h36 l12 22 M382 338 h36"/>
+  <path d="M368 480 q16 -26 32 0 t32 0 t32 0" stroke-width="6"/>
+  <circle cx="400" cy="614" r="20"/><path d="M400 634 v70 M388 692 l12 14 12 -14" stroke-width="6"/>
+</g>
+<g stroke="${C.hot}" stroke-width="5" stroke-linecap="round" fill="none" opacity=".9">
+  <path d="M462 220 h74 M524 208 l12 12 -12 12"/>
+  <path d="M462 360 h74 M524 348 l12 12 -12 12"/>
+  <path d="M462 480 h74 M524 468 l12 12 -12 12"/>
+</g>
+</svg>`
+};
+
+const SHOTS={
+  design:   {n:'01', src:'photos/01-design.jpg'},
+  supply:   {n:'02', src:'photos/02-supply.jpg'},
+  fabricate:{n:'03', src:'photos/03-fabricate.jpg'},
+  install:  {n:'04', src:'photos/04-install.jpg'},
+  service:  {n:'05', src:'photos/05-service.jpg'}
+};
+document.querySelectorAll('.shot').forEach(fig=>{
+  const key=fig.dataset.shot, c=SHOTS[key]; if(!c) return;
+  const badge=`<div class="badge">${c.n}</div>`;
+  fig.innerHTML = `<div class="scene">${SCENES[key]}</div>` + badge;
+  const img=new Image();
+  img.onload=()=>{ fig.innerHTML=badge; fig.insertBefore(img, fig.firstChild); };
+  img.src=c.src;
+});
+
+/* fingerprint ridges */
+(()=>{
+  const el=document.getElementById('finger'); if(!el) return;
+  const s=document.createElementNS(NS,'svg'); s.setAttribute('viewBox','0 0 200 260');
+  const dash=['','58 10 34 8','44 12 70 9','80 8 30 12','36 10 52 8','64 9 28 10','48 8 40 12','90 10 26 8'];
+  for(let i=0;i<8;i++){
+    const e=document.createElementNS(NS,'ellipse');
+    e.setAttribute('cx',100); e.setAttribute('cy',138);
+    e.setAttribute('rx',16+i*11); e.setAttribute('ry',22+i*15);
+    e.setAttribute('fill','none'); e.setAttribute('stroke','currentColor');
+    e.setAttribute('stroke-width',5); e.setAttribute('stroke-linecap','round');
+    if(dash[i]) e.setAttribute('stroke-dasharray',dash[i]);
+    e.setAttribute('transform',`rotate(${i%2? -6:5} 100 138)`);
+    s.appendChild(e);
+  }
+  const w=document.createElementNS(NS,'path');
+  w.setAttribute('d','M100 122 a14 18 0 1 1 -1 0 M100 108 a26 32 0 1 1 -1 0');
+  w.setAttribute('fill','none'); w.setAttribute('stroke','currentColor'); w.setAttribute('stroke-width',5);
+  s.appendChild(w);
+  el.appendChild(s);
+})();
+
+/* case barcode */
+(()=>{
+  const bars=document.getElementById('barcode'); if(!bars) return;
+  const widths=[3,2,5,2,3,7,2,4,2,6,3,2,5,3,2,7,2,4,3,2,6,3,2,5,2,3,7,2,4,3,2,6];
+  let x=0;
+  widths.forEach((w,i)=>{
+    const r=document.createElementNS(NS,'rect');
+    r.setAttribute('x',x); r.setAttribute('y',0); r.setAttribute('width',w); r.setAttribute('height',26);
+    bars.appendChild(r); x+=w+(i%3===0?4:2);
+  });
+})();
+
+/* verdict stamps in every evidence band */
 const CHECK=`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.8 9.2 18 20 6.4"/></svg>`;
 const CROSS=`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5.5 5.5 18.5 18.5M18.5 5.5 5.5 18.5"/></svg>`;
 document.querySelectorAll('.band').forEach(b=>{

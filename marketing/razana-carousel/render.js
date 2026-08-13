@@ -19,7 +19,7 @@ const OUT = path.join(DIR, 'out');
   // report any overflow so layout problems are visible
   const diag = await page.evaluate(() => {
     return [...document.querySelectorAll('.slide')].map(s => {
-      const wrap = s.querySelector('.d-wrap, .l-wrap');
+      const wrap = s.querySelector('.d-wrap, .e-wrap');
       return {
         id: s.id,
         h: s.getBoundingClientRect().height,
