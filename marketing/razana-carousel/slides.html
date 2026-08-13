@@ -13,7 +13,7 @@
   --champagne:#EFD3A6;
   --champagne-2:#C9A473;
   --cream:#F6F2E9;
-  --muted:#5D6A88;
+  --muted:#42517A;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html,body{background:#0b0b0b}
@@ -28,16 +28,16 @@ body{
   content:'';position:absolute;inset:-20%;pointer-events:none;z-index:40;
   background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='240' height='240' filter='url(%23n)' opacity='0.5'/></svg>");
 }
-.slide.dark .grain::after{opacity:.11;mix-blend-mode:overlay}
-.slide.light .grain::after{opacity:.16;mix-blend-mode:multiply}
+.slide.dark .grain::after{opacity:.055;mix-blend-mode:overlay}
+.slide.light .grain::after{opacity:.055;mix-blend-mode:multiply}
 
 .vignette{position:absolute;inset:0;z-index:3;pointer-events:none}
 .slide.dark .vignette{
   background:
-    radial-gradient(120% 74% at 50% 16%, rgba(86,120,196,.20) 0%, rgba(0,0,0,0) 60%),
-    radial-gradient(110% 88% at 50% 50%, rgba(0,0,0,0) 44%, rgba(4,9,20,.70) 100%);
+    radial-gradient(120% 74% at 50% 14%, rgba(104,150,246,.26) 0%, rgba(0,0,0,0) 62%),
+    radial-gradient(112% 90% at 50% 50%, rgba(0,0,0,0) 52%, rgba(4,9,22,.50) 100%);
 }
-.slide.light .vignette{background:radial-gradient(115% 92% at 50% 40%, rgba(0,0,0,0) 50%, rgba(31,52,98,.09) 100%)}
+.slide.light .vignette{background:radial-gradient(118% 94% at 50% 40%, rgba(0,0,0,0) 58%, rgba(31,52,98,.055) 100%)}
 
 /* ---------- hairline frame ---------- */
 .frame{position:absolute;inset:42px;z-index:5;pointer-events:none}
@@ -65,7 +65,7 @@ body{
 .rule{height:1px;flex:1;background:currentColor;opacity:.45}
 
 /* ================= DARK ================= */
-.slide.dark{background:linear-gradient(167deg,#2B4E86 0%,#1F3563 30%,#142549 64%,#0A122A 100%)}
+.slide.dark{background:linear-gradient(167deg,#315DA8 0%,#22407D 30%,#132A5C 64%,#070F2B 100%)}
 .arcmark{position:absolute;z-index:1;pointer-events:none;opacity:.042;color:#fff}
 .arcmark svg{display:block;width:100%;height:100%;overflow:visible}
 .d-wrap{position:relative;z-index:10;height:100%;display:flex;flex-direction:column;align-items:center;
@@ -112,16 +112,16 @@ h1.hero .big{display:block;font-weight:900;font-size:104px;line-height:1.16;marg
 .chev span:nth-child(2){opacity:.6}.chev span:nth-child(3){opacity:.28}
 
 /* ================= LIGHT ================= */
-.slide.light{background:linear-gradient(172deg,#FCFAF5 0%,#F5F1E7 48%,#EDE7D9 100%)}
+.slide.light{background:linear-gradient(172deg,#FFFEFA 0%,#FBF7EE 46%,#F4EEE0 100%)}
 .l-wrap{position:relative;z-index:10;height:100%;display:flex;flex-direction:column;align-items:center;
   padding:96px 84px 214px;text-align:center}
 
 .ghostnum{position:absolute;z-index:2;font-family:'Tajawal',sans-serif;font-weight:900;
-  font-size:660px;line-height:.72;color:var(--navy);opacity:.040;direction:ltr;
+  font-size:660px;line-height:.72;color:#B98A63;opacity:.085;direction:ltr;
   left:50%;transform:translateX(-50%);top:250px;letter-spacing:-.06em;pointer-events:none}
 
 .tab{position:absolute;top:0;left:50%;transform:translateX(-50%);
-  background:linear-gradient(180deg,#24396B,#1B2E56);color:var(--champagne);
+  background:linear-gradient(180deg,#2A4680,#1D3162);color:var(--champagne);
   padding:16px 42px 18px;border-radius:0 0 18px 18px;
   font-family:'Reem Kufi',sans-serif;font-weight:600;letter-spacing:.24em;font-size:25px;
   box-shadow:0 14px 30px rgba(31,52,98,.30);z-index:20;padding-right:calc(42px + .24em)}
@@ -133,9 +133,10 @@ h1.hero .big{display:block;font-weight:900;font-size:104px;line-height:1.16;marg
 
 .medallion{width:250px;height:250px;border-radius:50%;position:relative;display:grid;place-items:center;
   margin-top:44px;flex:none;
-  background:radial-gradient(circle at 50% 32%, #FFFFFF 0%, #F8F4EC 56%, #F0EADC 100%);
-  box-shadow:0 22px 46px rgba(31,52,98,.11), inset 0 0 0 1px rgba(31,52,98,.15)}
-.medallion::before{content:'';position:absolute;inset:14px;border-radius:50%;border:1.5px dashed rgba(31,52,98,.22)}
+  color:#FF8A45;
+  background:radial-gradient(circle at 50% 28%, #2E4C8C 0%, #223B6E 52%, #16274C 100%);
+  box-shadow:0 26px 54px rgba(20,37,79,.34), 0 0 0 9px rgba(31,52,98,.055), inset 0 2px 0 rgba(255,255,255,.14)}
+.medallion::before{content:'';position:absolute;inset:14px;border-radius:50%;border:1.5px dashed rgba(239,211,166,.42)}
 .medallion svg{width:132px;height:132px;display:block}
 
 h1.head{font-family:'Tajawal',sans-serif;font-weight:800;color:var(--navy);
@@ -149,8 +150,8 @@ p.sub b{color:var(--navy);font-weight:600}
 .ornament b{width:9px;height:9px;transform:rotate(45deg);background:var(--orange);opacity:.75;display:block}
 
 .quote{width:100%;position:relative;
-  background:linear-gradient(180deg,rgba(31,52,98,.062),rgba(31,52,98,.028));
-  border:1px solid rgba(31,52,98,.15);border-right:6px solid var(--orange);
+  background:linear-gradient(180deg,rgba(31,52,98,.085),rgba(31,52,98,.038));
+  border:1px solid rgba(31,52,98,.20);border-right:6px solid var(--orange);
   border-radius:8px 20px 20px 8px;padding:30px 40px 34px;text-align:right}
 .quote .qlab{font-family:'Reem Kufi',sans-serif;font-weight:600;font-size:22px;letter-spacing:.24em;
   color:var(--orange);padding-right:.24em}
@@ -160,11 +161,11 @@ p.sub b{color:var(--navy);font-weight:600}
   line-height:1;color:var(--navy);opacity:.10}
 
 .dots{position:absolute;bottom:196px;left:0;right:0;direction:ltr;display:flex;justify-content:center;gap:12px;z-index:16}
-.dots i{width:9px;height:9px;border-radius:50%;background:rgba(31,52,98,.24)}
+.dots i{width:9px;height:9px;border-radius:50%;background:rgba(31,52,98,.34)}
 .dots i.on{background:var(--orange);width:32px;border-radius:6px}
 
 .band{position:absolute;bottom:0;left:0;right:0;height:172px;z-index:15;
-  background:linear-gradient(100deg,#1B2E56 0%,#20376A 52%,#17284E 100%);
+  background:linear-gradient(100deg,#1E3565 0%,#254280 52%,#192D5C 100%);
   display:flex;align-items:center;justify-content:center}
 .band::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;
   background:linear-gradient(90deg,transparent,var(--orange) 20%,var(--champagne) 50%,var(--orange) 80%,transparent);opacity:.92}
@@ -193,9 +194,17 @@ h1.reveal{font-family:'Tajawal',sans-serif;font-weight:900;font-size:88px;line-h
   background:linear-gradient(96deg,#FF8F58 0%,#FE6E2D 52%,#EF541A 100%);color:#fff;
   font-family:'Tajawal',sans-serif;font-weight:900;font-size:54px;padding:32px 40px 38px;border-radius:22px;
   box-shadow:0 22px 48px rgba(254,110,45,.36), inset 0 2px 0 rgba(255,255,255,.32)}
-.cta .fine{font-weight:300;font-size:27px;color:#ABBAD9;margin-top:22px;line-height:1.6}
-.phone{font-family:'Tajawal',sans-serif;font-weight:800;font-size:46px;color:var(--champagne);
-  margin-top:14px;letter-spacing:.06em;direction:ltr}
+.cta .fine{font-weight:300;font-size:27px;color:#B3C2E0;margin-top:20px;line-height:1.6}
+.phone{display:flex;align-items:center;justify-content:center;gap:16px;
+  font-family:'Tajawal',sans-serif;font-weight:800;font-size:46px;color:var(--champagne);
+  margin-top:16px;letter-spacing:.05em;direction:ltr}
+.phone svg{width:38px;height:38px;flex:none;opacity:.9}
+.meta{display:flex;align-items:center;justify-content:center;gap:22px;margin-top:18px;
+  font-size:26px;font-weight:400;color:#AEBDDC}
+.meta span{display:flex;align-items:center;gap:11px;white-space:nowrap}
+.meta svg{width:25px;height:25px;flex:none;color:var(--orange);opacity:.95}
+.meta i{direction:ltr;font-style:normal;letter-spacing:.02em}
+.meta b{width:1px;height:24px;background:rgba(239,211,166,.34);display:block;flex:none}
 </style>
 </head>
 <body>
@@ -363,7 +372,21 @@ h1.reveal{font-family:'Tajawal',sans-serif;font-weight:900;font-size:88px;line-h
     <div class="cta">
       <div class="btn">اطلب عرض سعرك الحين</div>
       <div class="fine">أرسل لنا مخطط مطبخك أو الـ RFQ ونرجع لك بعرض كامل</div>
-      <div class="phone">+971 50 000 0000</div>
+      <div class="phone">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 16.9v2.7a1.8 1.8 0 0 1-2 1.8 17.8 17.8 0 0 1-7.7-2.8 17.5 17.5 0 0 1-5.4-5.4A17.8 17.8 0 0 1 3.6 5.5a1.8 1.8 0 0 1 1.8-2h2.7a1.8 1.8 0 0 1 1.8 1.6c.1.9.3 1.7.6 2.5a1.8 1.8 0 0 1-.4 1.9l-1.1 1.1a14.4 14.4 0 0 0 5.4 5.4l1.1-1.1a1.8 1.8 0 0 1 1.9-.4c.8.3 1.6.5 2.5.6a1.8 1.8 0 0 1 1.6 1.8z"/></svg>
+        <span>+971 6 543 4416</span>
+      </div>
+      <div class="meta">
+        <span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10.5c0 5.5-8 12-8 12s-8-6.5-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10.3" r="2.9"/></svg>
+          الشارقة — شارع الوحدة
+        </span>
+        <b></b>
+        <span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18 15 15 0 0 1 0-18z"/></svg>
+          <i>alrazanaonline.com</i>
+        </span>
+      </div>
     </div>
   </div>
 </section>
@@ -387,26 +410,26 @@ document.querySelectorAll('.arcmark').forEach(el=>{
 
 /* service line-art icons */
 const ICONS={
-  design:`<svg viewBox="0 0 100 100" fill="none" stroke="#FE6E2D" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round">
+  design:`<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round">
     <path d="M14 14h72M14 10v8M86 10v8" stroke-width="2.4" opacity=".55"/>
     <rect x="16" y="28" width="68" height="54" rx="4"/>
     <path d="M16 44h28M44 28v54M60 44h24M60 64h24"/>
     <circle cx="72" cy="54" r="6.5"/>
     <path d="M23 56h14M30 51v10" opacity=".85"/>
   </svg>`,
-  supply:`<svg viewBox="0 0 100 100" fill="none" stroke="#FE6E2D" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round">
+  supply:`<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round">
     <path d="M52 18 82 31v32L52 76 22 63V31z"/>
     <path d="M22 31l30 13 30-13M52 44v32"/>
     <path d="M37 24l30 13" opacity=".5"/>
     <path d="M14 40H3M17 52H6M15 64H4" stroke-width="2.8" opacity=".68"/>
   </svg>`,
-  fabricate:`<svg viewBox="0 0 100 100" fill="none" stroke="#FE6E2D" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round">
+  fabricate:`<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round">
     <path d="M16 56h68M22 56v26M78 56v26M34 56v13M66 56v13"/>
     <path d="M20 47h60a4 4 0 0 1 4 4v5H16v-5a4 4 0 0 1 4-4z"/>
     <path d="M50 40V24M42 30l8-8 8 8"/>
     <path d="M33 20l-4-7M67 20l4-7M50 15V7" stroke-width="2.6" opacity=".6"/>
   </svg>`,
-  install:`<svg viewBox="0 0 100 100" fill="none" stroke="#FE6E2D" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round">
+  install:`<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round">
     <path d="M22 16h56" stroke-width="2.6" opacity=".55"/>
     <rect x="20" y="26" width="60" height="46" rx="5"/>
     <circle cx="37" cy="41" r="6.5"/><circle cx="63" cy="41" r="6.5"/>
@@ -414,7 +437,7 @@ const ICONS={
     <path d="M88 90 74 76" stroke-width="4"/>
     <path d="M74 76a9 9 0 0 1 11-11l-6 6 5 5 6-6a9 9 0 0 1-11 11z"/>
   </svg>`,
-  service:`<svg viewBox="0 0 100 100" fill="none" stroke="#FE6E2D" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round">
+  service:`<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round">
     <g stroke-width="7" stroke-linecap="butt">
       <path d="M42 20v8M42 64v8M64 42h-8M28 42h-8M57.6 26.4l-5.6 5.6M32 52l-5.6 5.6M57.6 57.6l-5.6-5.6M32 32l-5.6-5.6"/>
     </g>
