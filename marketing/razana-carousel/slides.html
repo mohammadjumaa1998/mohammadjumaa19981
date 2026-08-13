@@ -1,0 +1,441 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<title>AL RAZANA — Carousel</title>
+<link rel="stylesheet" href="./fonts/fonts.css">
+<style>
+:root{
+  --navy:#1F3462;
+  --navy-deep:#16274D;
+  --orange:#FE6E2D;
+  --copper:#E08A45;
+  --champagne:#EFD3A6;
+  --champagne-2:#C9A473;
+  --cream:#F6F2E9;
+  --muted:#5D6A88;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{background:#0b0b0b}
+body{
+  font-family:'IBM Plex Sans Arabic','Tajawal',sans-serif;
+  -webkit-font-smoothing:antialiased;text-rendering:geometricPrecision;
+}
+.slide{position:relative;width:1080px;height:1350px;overflow:hidden;margin:0 auto 40px;isolation:isolate}
+
+/* ---------- texture ---------- */
+.grain::after{
+  content:'';position:absolute;inset:-20%;pointer-events:none;z-index:40;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='240' height='240' filter='url(%23n)' opacity='0.5'/></svg>");
+}
+.slide.dark .grain::after{opacity:.11;mix-blend-mode:overlay}
+.slide.light .grain::after{opacity:.16;mix-blend-mode:multiply}
+
+.vignette{position:absolute;inset:0;z-index:3;pointer-events:none}
+.slide.dark .vignette{
+  background:
+    radial-gradient(120% 74% at 50% 16%, rgba(86,120,196,.20) 0%, rgba(0,0,0,0) 60%),
+    radial-gradient(110% 88% at 50% 50%, rgba(0,0,0,0) 44%, rgba(4,9,20,.70) 100%);
+}
+.slide.light .vignette{background:radial-gradient(115% 92% at 50% 40%, rgba(0,0,0,0) 50%, rgba(31,52,98,.09) 100%)}
+
+/* ---------- hairline frame ---------- */
+.frame{position:absolute;inset:42px;z-index:5;pointer-events:none}
+.frame i{position:absolute;inset:0;border:1px solid currentColor;opacity:.20}
+.frame b{position:absolute;width:58px;height:58px;display:block}
+.frame b::before,.frame b::after{content:'';position:absolute;background:currentColor;opacity:.9}
+.frame b::before{width:58px;height:1.6px}
+.frame b::after{width:1.6px;height:58px}
+.frame b.tl{top:0;left:0}.frame b.tl::before{top:0;left:0}.frame b.tl::after{top:0;left:0}
+.frame b.tr{top:0;right:0}.frame b.tr::before{top:0;right:0}.frame b.tr::after{top:0;right:0}
+.frame b.bl{bottom:0;left:0}.frame b.bl::before{bottom:0;left:0}.frame b.bl::after{bottom:0;left:0}
+.frame b.br{bottom:0;right:0}.frame b.br::before{bottom:0;right:0}.frame b.br::after{bottom:0;right:0}
+.slide.dark .frame{color:var(--champagne-2)}
+.slide.light .frame{color:rgba(31,52,98,.32)}
+
+/* ---------- foil ---------- */
+.foil{
+  background:linear-gradient(102deg,#AF7F42 0%,#E7C695 13%,#FFF7E6 28%,#E2BE8A 45%,#BE9153 60%,#F4E0BA 78%,#C9A473 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.orangefoil{
+  background:linear-gradient(100deg,#FF9463 0%,#FE6E2D 40%,#FFA97C 63%,#FE6E2D 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.rule{height:1px;flex:1;background:currentColor;opacity:.45}
+
+/* ================= DARK ================= */
+.slide.dark{background:linear-gradient(167deg,#2B4E86 0%,#1F3563 30%,#142549 64%,#0A122A 100%)}
+.arcmark{position:absolute;z-index:1;pointer-events:none;opacity:.042;color:#fff}
+.arcmark svg{display:block;width:100%;height:100%;overflow:visible}
+.d-wrap{position:relative;z-index:10;height:100%;display:flex;flex-direction:column;align-items:center;
+  padding:98px 88px 84px;text-align:center}
+.logo-w{height:92px;display:block}
+.logo-c{height:76px;display:block}
+
+.notice{display:flex;align-items:center;gap:26px;width:100%;color:var(--champagne-2);margin-top:46px}
+.notice .t{font-family:'Reem Kufi',sans-serif;font-weight:600;letter-spacing:.42em;font-size:29px;
+  color:var(--champagne);white-space:nowrap;padding-right:.42em}
+.kicker{font-size:35px;font-weight:300;color:#C2CDE6;line-height:1.55;margin-top:38px}
+
+/* redacted-name file card */
+.card{
+  margin-top:36px;background:linear-gradient(176deg,#FDFBF6,#EFE9DB);
+  border-radius:9px;padding:26px 46px 34px;transform:rotate(-1.1deg);
+  box-shadow:0 32px 62px rgba(3,8,20,.55), inset 0 2px 0 rgba(255,255,255,.7);position:relative;
+}
+.card::after{content:'';position:absolute;inset:8px;border:1px solid rgba(31,52,98,.22);border-radius:4px}
+.card .clab{font-family:'Reem Kufi',sans-serif;font-weight:600;font-size:20px;letter-spacing:.32em;
+  color:#98A0B4;position:relative;z-index:2;padding-right:.32em}
+.nameline{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:14px;position:relative;z-index:2}
+.nameline .nm{font-family:'Tajawal',sans-serif;font-weight:900;font-size:86px;color:var(--navy);line-height:1.2}
+.redact{width:270px;height:70px;display:block;flex:none}
+
+h1.hero{font-family:'Tajawal',sans-serif;font-weight:800;font-size:64px;line-height:1.34;color:#E7EEFF;margin-top:50px}
+h1.hero .big{display:block;font-weight:900;font-size:104px;line-height:1.16;margin-top:10px}
+
+/* unpaid dossier stamp */
+.unpaid{
+  margin-top:58px;transform:rotate(-7.5deg);position:relative;
+  border:4px solid rgba(254,110,45,.78);border-radius:12px;
+  padding:14px 54px 18px;color:rgba(254,110,45,.92);
+  font-family:'Tajawal',sans-serif;font-weight:900;font-size:56px;letter-spacing:.06em;line-height:1.1;
+  box-shadow:0 0 0 3px rgba(254,110,45,.16) inset;
+}
+.unpaid::after{content:'';position:absolute;inset:7px;border:2px solid rgba(254,110,45,.34);border-radius:6px}
+
+.swipe{margin-top:auto;display:flex;flex-direction:column;align-items:center;gap:22px}
+.swipe .txt{font-weight:300;font-size:32px;color:#A6B4D4;letter-spacing:.03em}
+.chev{display:flex;gap:10px;align-items:center}
+.chev span{width:20px;height:20px;border-left:4px solid var(--orange);border-bottom:4px solid var(--orange);
+  transform:rotate(45deg);display:block}
+.chev span:nth-child(2){opacity:.6}.chev span:nth-child(3){opacity:.28}
+
+/* ================= LIGHT ================= */
+.slide.light{background:linear-gradient(172deg,#FCFAF5 0%,#F5F1E7 48%,#EDE7D9 100%)}
+.l-wrap{position:relative;z-index:10;height:100%;display:flex;flex-direction:column;align-items:center;
+  padding:96px 84px 214px;text-align:center}
+
+.ghostnum{position:absolute;z-index:2;font-family:'Tajawal',sans-serif;font-weight:900;
+  font-size:660px;line-height:.72;color:var(--navy);opacity:.040;direction:ltr;
+  left:50%;transform:translateX(-50%);top:250px;letter-spacing:-.06em;pointer-events:none}
+
+.tab{position:absolute;top:0;left:50%;transform:translateX(-50%);
+  background:linear-gradient(180deg,#24396B,#1B2E56);color:var(--champagne);
+  padding:16px 42px 18px;border-radius:0 0 18px 18px;
+  font-family:'Reem Kufi',sans-serif;font-weight:600;letter-spacing:.24em;font-size:25px;
+  box-shadow:0 14px 30px rgba(31,52,98,.30);z-index:20;padding-right:calc(42px + .24em)}
+.tab .num{color:#fff;direction:ltr;display:inline-block;letter-spacing:.10em}
+
+.svc{display:flex;align-items:center;gap:24px;width:100%;color:var(--copper);margin-top:32px}
+.svc .t{font-family:'Reem Kufi',sans-serif;font-weight:600;letter-spacing:.26em;font-size:28px;
+  color:var(--orange);white-space:nowrap;padding-right:.26em}
+
+.medallion{width:250px;height:250px;border-radius:50%;position:relative;display:grid;place-items:center;
+  margin-top:44px;flex:none;
+  background:radial-gradient(circle at 50% 32%, #FFFFFF 0%, #F8F4EC 56%, #F0EADC 100%);
+  box-shadow:0 22px 46px rgba(31,52,98,.11), inset 0 0 0 1px rgba(31,52,98,.15)}
+.medallion::before{content:'';position:absolute;inset:14px;border-radius:50%;border:1.5px dashed rgba(31,52,98,.22)}
+.medallion svg{width:132px;height:132px;display:block}
+
+h1.head{font-family:'Tajawal',sans-serif;font-weight:800;color:var(--navy);
+  font-size:76px;line-height:1.28;margin-top:44px}
+p.sub{font-weight:400;color:var(--muted);font-size:33px;line-height:1.74;margin-top:26px;max-width:810px}
+p.sub b{color:var(--navy);font-weight:600}
+
+.ornament{margin-top:auto;display:flex;align-items:center;justify-content:center;gap:16px;width:100%;
+  color:rgba(31,52,98,.30);padding-bottom:34px}
+.ornament span{height:1px;flex:1;max-width:210px;background:currentColor}
+.ornament b{width:9px;height:9px;transform:rotate(45deg);background:var(--orange);opacity:.75;display:block}
+
+.quote{width:100%;position:relative;
+  background:linear-gradient(180deg,rgba(31,52,98,.062),rgba(31,52,98,.028));
+  border:1px solid rgba(31,52,98,.15);border-right:6px solid var(--orange);
+  border-radius:8px 20px 20px 8px;padding:30px 40px 34px;text-align:right}
+.quote .qlab{font-family:'Reem Kufi',sans-serif;font-weight:600;font-size:22px;letter-spacing:.24em;
+  color:var(--orange);padding-right:.24em}
+.quote .qtxt{font-family:'Tajawal',sans-serif;font-weight:700;font-size:42px;line-height:1.46;
+  color:var(--navy);margin-top:12px}
+.quote .mark{position:absolute;left:30px;bottom:6px;font-family:'Amiri',serif;font-size:158px;
+  line-height:1;color:var(--navy);opacity:.10}
+
+.dots{position:absolute;bottom:196px;left:0;right:0;direction:ltr;display:flex;justify-content:center;gap:12px;z-index:16}
+.dots i{width:9px;height:9px;border-radius:50%;background:rgba(31,52,98,.24)}
+.dots i.on{background:var(--orange);width:32px;border-radius:6px}
+
+.band{position:absolute;bottom:0;left:0;right:0;height:172px;z-index:15;
+  background:linear-gradient(100deg,#1B2E56 0%,#20376A 52%,#17284E 100%);
+  display:flex;align-items:center;justify-content:center}
+.band::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,transparent,var(--orange) 20%,var(--champagne) 50%,var(--orange) 80%,transparent);opacity:.92}
+.band::after{content:'';position:absolute;inset:0;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='240' height='240' filter='url(%23n)' opacity='0.5'/></svg>");
+  opacity:.10;mix-blend-mode:overlay;pointer-events:none}
+.stamp{display:flex;align-items:center;gap:16px;padding:15px 40px;border:2.5px solid currentColor;
+  border-radius:14px;font-family:'Tajawal',sans-serif;font-weight:800;font-size:42px;position:relative;z-index:2}
+.stamp svg{width:38px;height:38px;flex:none}
+.stamp.yes{color:var(--champagne);transform:rotate(-2deg)}
+.stamp.no{color:var(--orange);transform:rotate(1.8deg)}
+.band .sep{width:1px;height:78px;background:rgba(239,211,166,.28);margin:0 44px;position:relative;z-index:2}
+
+/* ================= SLIDE 7 ================= */
+.reveal-k{font-weight:300;font-size:39px;color:#ABBAD9;margin-top:44px;letter-spacing:.02em}
+h1.reveal{font-family:'Tajawal',sans-serif;font-weight:900;font-size:88px;line-height:1.24;margin-top:14px}
+.reveal-s{font-weight:400;font-size:34px;line-height:1.68;color:#C4CFE7;margin-top:30px;max-width:840px}
+.reveal-s b{color:#fff;font-weight:600}
+.chips{display:flex;flex-wrap:wrap;justify-content:center;gap:13px;margin-top:36px}
+.chips span{font-family:'Reem Kufi',sans-serif;font-weight:500;font-size:26px;letter-spacing:.10em;
+  color:var(--champagne);border:1px solid rgba(239,211,166,.40);padding:12px 30px;border-radius:999px;
+  background:rgba(239,211,166,.05);padding-right:calc(30px + .10em)}
+.tagline{font-family:'Tajawal',sans-serif;font-weight:700;font-size:35px;color:#E9EFFF;margin-top:36px;line-height:1.48}
+.cta{margin-top:auto;width:100%;display:flex;flex-direction:column;align-items:center}
+.btn{display:block;width:100%;text-align:center;
+  background:linear-gradient(96deg,#FF8F58 0%,#FE6E2D 52%,#EF541A 100%);color:#fff;
+  font-family:'Tajawal',sans-serif;font-weight:900;font-size:54px;padding:32px 40px 38px;border-radius:22px;
+  box-shadow:0 22px 48px rgba(254,110,45,.36), inset 0 2px 0 rgba(255,255,255,.32)}
+.cta .fine{font-weight:300;font-size:27px;color:#ABBAD9;margin-top:22px;line-height:1.6}
+.phone{font-family:'Tajawal',sans-serif;font-weight:800;font-size:46px;color:var(--champagne);
+  margin-top:14px;letter-spacing:.06em;direction:ltr}
+</style>
+</head>
+<body>
+
+<!-- ===================== 1 · HOOK ===================== -->
+<section class="slide dark grain" id="s1">
+  <div class="arcmark" style="width:1560px;height:830px;left:-240px;bottom:-170px"></div>
+  <div class="vignette"></div>
+  <div class="frame"><i></i><b class="tl"></b><b class="tr"></b><b class="bl"></b><b class="br"></b></div>
+  <div class="d-wrap">
+    <img class="logo-w" src="./logo-white.png" alt="AL RAZANA">
+    <div class="notice"><span class="rule"></span><span class="t">تنويــه</span><span class="rule"></span></div>
+    <div class="kicker">بعد ٦ شهور صبر... اضطرينا ننشر</div>
+
+    <div class="card">
+      <div class="clab">اســم العميــل</div>
+      <div class="nameline">
+        <span class="nm">خالد الـ</span>
+        <svg class="redact" viewBox="0 0 270 70" preserveAspectRatio="none">
+          <path d="M8,17 L262,13 L264,55 L10,58 Z" fill="#0A1122"/>
+          <path d="M12,20 C70,10 130,24 196,14 C230,9 250,18 262,15" stroke="#0A1122" stroke-width="19" stroke-linecap="round" fill="none"/>
+          <path d="M10,52 C74,60 132,46 194,58 C228,64 250,54 262,57" stroke="#0A1122" stroke-width="17" stroke-linecap="round" fill="none"/>
+          <path d="M16,36 C80,28 128,44 190,34 C226,28 248,38 258,34" stroke="#0A1122" stroke-width="26" stroke-linecap="round" fill="none"/>
+        </svg>
+      </div>
+    </div>
+
+    <h1 class="hero">
+      استلم مطبخ مطعم كامل...
+      <span class="big orangefoil">وما دفع ولا درهم</span>
+    </h1>
+
+    <div class="unpaid">غيــر مســدّد</div>
+
+    <div class="swipe">
+      <div class="txt">وهذا كل اللي سوّيناه له</div>
+      <div class="chev"><span></span><span></span><span></span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 2-6 · EVIDENCE ===================== -->
+<section class="slide light grain" id="s2">
+  <div class="vignette"></div>
+  <div class="frame"><i></i><b class="tl"></b><b class="tr"></b><b class="bl"></b><b class="br"></b></div>
+  <div class="tab">الدليــل <span class="num">01</span></div>
+  <div class="ghostnum">01</div>
+  <div class="l-wrap">
+    <img class="logo-c" src="./logo.png" alt="AL RAZANA">
+    <div class="svc"><span class="rule"></span><span class="t">التصميم والاستشارة</span><span class="rule"></span></div>
+    <div class="medallion" data-icon="design"></div>
+    <h1 class="head">صمّمنا له المطبخ<br>من الصفر</h1>
+    <p class="sub">مخطط كامل بالمليمتر — حركة الشيفات، التهوية، والمساحات.<br><b>قبل ما يشتري ولا جهاز.</b></p>
+    <div class="ornament"><span></span><b></b><span></span></div>
+    <div class="quote">
+      <div class="qlab">وعــده وقتهــا</div>
+      <div class="qtxt">«الدفعة أول ما نخلّص التصميم»</div>
+      <div class="mark">”</div>
+    </div>
+  </div>
+  <div class="dots"><i></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i></div>
+  <div class="band"></div>
+</section>
+
+<section class="slide light grain" id="s3">
+  <div class="vignette"></div>
+  <div class="frame"><i></i><b class="tl"></b><b class="tr"></b><b class="bl"></b><b class="br"></b></div>
+  <div class="tab">الدليــل <span class="num">02</span></div>
+  <div class="ghostnum">02</div>
+  <div class="l-wrap">
+    <img class="logo-c" src="./logo.png" alt="AL RAZANA">
+    <div class="svc"><span class="rule"></span><span class="t">التوريــد</span><span class="rule"></span></div>
+    <div class="medallion" data-icon="supply"></div>
+    <h1 class="head">وصّلنا له المعدات<br>كاملة</h1>
+    <p class="sub">طبخ، تحضير، وتبريد — وكالات أوروبية معتمدة،<br><b>وكل قطعة بضمانها.</b></p>
+    <div class="ornament"><span></span><b></b><span></span></div>
+    <div class="quote">
+      <div class="qlab">وعــده وقتهــا</div>
+      <div class="qtxt">«أول ما توصل البضاعة، على طول»</div>
+      <div class="mark">”</div>
+    </div>
+  </div>
+  <div class="dots"><i></i><i></i><i class="on"></i><i></i><i></i><i></i><i></i></div>
+  <div class="band"></div>
+</section>
+
+<section class="slide light grain" id="s4">
+  <div class="vignette"></div>
+  <div class="frame"><i></i><b class="tl"></b><b class="tr"></b><b class="bl"></b><b class="br"></b></div>
+  <div class="tab">الدليــل <span class="num">03</span></div>
+  <div class="ghostnum">03</div>
+  <div class="l-wrap">
+    <img class="logo-c" src="./logo.png" alt="AL RAZANA">
+    <div class="svc"><span class="rule"></span><span class="t">التصنيــع</span><span class="rule"></span></div>
+    <div class="medallion" data-icon="fabricate"></div>
+    <h1 class="head">صنّعنا له الستانلس<br>على مقاسه</h1>
+    <p class="sub">طاولات، مغاسل، وأرفف — بمصنعنا،<br><b>على مخططه بالضبط.</b></p>
+    <div class="ornament"><span></span><b></b><span></span></div>
+    <div class="quote">
+      <div class="qlab">وعــده وقتهــا</div>
+      <div class="qtxt">«الشيك جاهز، بس المدير مسافر»</div>
+      <div class="mark">”</div>
+    </div>
+  </div>
+  <div class="dots"><i></i><i></i><i></i><i class="on"></i><i></i><i></i><i></i></div>
+  <div class="band"></div>
+</section>
+
+<section class="slide light grain" id="s5">
+  <div class="vignette"></div>
+  <div class="frame"><i></i><b class="tl"></b><b class="tr"></b><b class="bl"></b><b class="br"></b></div>
+  <div class="tab">الدليــل <span class="num">04</span></div>
+  <div class="ghostnum">04</div>
+  <div class="l-wrap">
+    <img class="logo-c" src="./logo.png" alt="AL RAZANA">
+    <div class="svc"><span class="rule"></span><span class="t">التركيب والتشغيل</span><span class="rule"></span></div>
+    <div class="medallion" data-icon="install"></div>
+    <h1 class="head">ركّبنا وشغّلنا<br>المطبخ</h1>
+    <p class="sub">شبكنا الغاز والكهربا والصرف،<br><b>وسلّمناه جاهز للخدمة من أول يوم.</b></p>
+    <div class="ornament"><span></span><b></b><span></span></div>
+    <div class="quote">
+      <div class="qlab">وعــده وقتهــا</div>
+      <div class="qtxt">«بعد الافتتاح مباشرة، وعد»</div>
+      <div class="mark">”</div>
+    </div>
+  </div>
+  <div class="dots"><i></i><i></i><i></i><i></i><i class="on"></i><i></i><i></i></div>
+  <div class="band"></div>
+</section>
+
+<section class="slide light grain" id="s6">
+  <div class="vignette"></div>
+  <div class="frame"><i></i><b class="tl"></b><b class="tr"></b><b class="bl"></b><b class="br"></b></div>
+  <div class="tab">الدليــل <span class="num">05</span></div>
+  <div class="ghostnum">05</div>
+  <div class="l-wrap">
+    <img class="logo-c" src="./logo.png" alt="AL RAZANA">
+    <div class="svc"><span class="rule"></span><span class="t">الصيانة وقطع الغيار</span><span class="rule"></span></div>
+    <div class="medallion" data-icon="service"></div>
+    <h1 class="head">وحتى بعد ما فتح...<br>ما تركناه</h1>
+    <p class="sub">صيانة وقطع غيار توصله نفس اليوم — لأن مطبخ<br><b>يوقف يوم واحد يعني خسارة ما تتعوّض.</b></p>
+    <div class="ornament"><span></span><b></b><span></span></div>
+    <div class="quote">
+      <div class="qlab">وعــده الأخيــر</div>
+      <div class="qtxt">«والله ناسي... أرسل لي الآيبان»</div>
+      <div class="mark">”</div>
+    </div>
+  </div>
+  <div class="dots"><i></i><i></i><i></i><i></i><i></i><i class="on"></i><i></i></div>
+  <div class="band"></div>
+</section>
+
+<!-- ===================== 7 · REVEAL ===================== -->
+<section class="slide dark grain" id="s7">
+  <div class="arcmark" style="width:1560px;height:830px;left:-240px;bottom:-190px"></div>
+  <div class="vignette"></div>
+  <div class="frame"><i></i><b class="tl"></b><b class="tr"></b><b class="bl"></b><b class="br"></b></div>
+  <div class="d-wrap" style="padding-top:92px">
+    <img class="logo-w" src="./logo-white.png" alt="AL RAZANA">
+    <div class="reveal-k">طيب... ليش ما دفع؟</div>
+    <h1 class="reveal foil">لأن خالد<br>مو موجود أصلاً</h1>
+    <p class="reveal-s">القصة كلها من خيالنا — بس كل خدمة شفتها فوق <b>حقيقية ١٠٠٪</b>.<br>نعرف إنكم تحبون الدراما، وحبينا نوريكم شغلنا بطريقة تنقرأ.</p>
+    <div class="chips"><span>تصميم</span><span>توريد</span><span>تصنيع</span><span>تركيب</span><span>صيانة</span></div>
+    <div class="tagline">من أول مخطط... لآخر قطعة غيار<br>تحت سقف واحد</div>
+    <div class="cta">
+      <div class="btn">اطلب عرض سعرك الحين</div>
+      <div class="fine">أرسل لنا مخطط مطبخك أو الـ RFQ ونرجع لك بعرض كامل</div>
+      <div class="phone">+971 50 000 0000</div>
+    </div>
+  </div>
+</section>
+
+<script>
+const NS='http://www.w3.org/2000/svg';
+
+/* logo-inspired arc watermark (dark slides only) */
+document.querySelectorAll('.arcmark').forEach(el=>{
+  const s=document.createElementNS(NS,'svg');
+  s.setAttribute('viewBox','0 0 400 220');
+  const cx=200,cy=200,R=150;
+  const mk=(r,w,o)=>{const p=document.createElementNS(NS,'path');
+    p.setAttribute('d',`M ${cx-r} ${cy} A ${r} ${r} 0 0 1 ${cx+r} ${cy}`);
+    p.setAttribute('fill','none');p.setAttribute('stroke','currentColor');
+    p.setAttribute('stroke-width',w);p.setAttribute('stroke-linecap','round');
+    p.setAttribute('opacity',o);s.appendChild(p);};
+  mk(R,26,1); mk(R-44,20,.55); mk(R-84,15,.32);
+  el.appendChild(s);
+});
+
+/* service line-art icons */
+const ICONS={
+  design:`<svg viewBox="0 0 100 100" fill="none" stroke="#FE6E2D" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M14 14h72M14 10v8M86 10v8" stroke-width="2.4" opacity=".55"/>
+    <rect x="16" y="28" width="68" height="54" rx="4"/>
+    <path d="M16 44h28M44 28v54M60 44h24M60 64h24"/>
+    <circle cx="72" cy="54" r="6.5"/>
+    <path d="M23 56h14M30 51v10" opacity=".85"/>
+  </svg>`,
+  supply:`<svg viewBox="0 0 100 100" fill="none" stroke="#FE6E2D" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M52 18 82 31v32L52 76 22 63V31z"/>
+    <path d="M22 31l30 13 30-13M52 44v32"/>
+    <path d="M37 24l30 13" opacity=".5"/>
+    <path d="M14 40H3M17 52H6M15 64H4" stroke-width="2.8" opacity=".68"/>
+  </svg>`,
+  fabricate:`<svg viewBox="0 0 100 100" fill="none" stroke="#FE6E2D" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M16 56h68M22 56v26M78 56v26M34 56v13M66 56v13"/>
+    <path d="M20 47h60a4 4 0 0 1 4 4v5H16v-5a4 4 0 0 1 4-4z"/>
+    <path d="M50 40V24M42 30l8-8 8 8"/>
+    <path d="M33 20l-4-7M67 20l4-7M50 15V7" stroke-width="2.6" opacity=".6"/>
+  </svg>`,
+  install:`<svg viewBox="0 0 100 100" fill="none" stroke="#FE6E2D" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M22 16h56" stroke-width="2.6" opacity=".55"/>
+    <rect x="20" y="26" width="60" height="46" rx="5"/>
+    <circle cx="37" cy="41" r="6.5"/><circle cx="63" cy="41" r="6.5"/>
+    <circle cx="37" cy="58" r="6.5"/><circle cx="63" cy="58" r="6.5"/>
+    <path d="M88 90 74 76" stroke-width="4"/>
+    <path d="M74 76a9 9 0 0 1 11-11l-6 6 5 5 6-6a9 9 0 0 1-11 11z"/>
+  </svg>`,
+  service:`<svg viewBox="0 0 100 100" fill="none" stroke="#FE6E2D" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round">
+    <g stroke-width="7" stroke-linecap="butt">
+      <path d="M42 20v8M42 64v8M64 42h-8M28 42h-8M57.6 26.4l-5.6 5.6M32 52l-5.6 5.6M57.6 57.6l-5.6-5.6M32 32l-5.6-5.6"/>
+    </g>
+    <circle cx="42" cy="42" r="19"/><circle cx="42" cy="42" r="7"/>
+    <g stroke-width="5.6" stroke-linecap="butt">
+      <path d="M72 56v5M72 83v5M86 70h-5M63 70h-5M82.6 59.4l-3.6 3.6M65.4 76.6l-3.6 3.6M82.6 80.6l-3.6-3.6M65.4 63.4l-3.6-3.6"/>
+    </g>
+    <circle cx="72" cy="70" r="11.5"/><circle cx="72" cy="70" r="4"/>
+  </svg>`
+};
+document.querySelectorAll('.medallion').forEach(m=>{m.innerHTML=ICONS[m.dataset.icon]||''});
+
+/* crisp stamp pair in every evidence band */
+const CHECK=`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.8 9.2 18 20 6.4"/></svg>`;
+const CROSS=`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5.5 5.5 18.5 18.5M18.5 5.5 5.5 18.5"/></svg>`;
+document.querySelectorAll('.band').forEach(b=>{
+  b.insertAdjacentHTML('beforeend',
+    `<div class="stamp yes">${CHECK}<span>استلم</span></div>
+     <div class="sep"></div>
+     <div class="stamp no">${CROSS}<span>دفع</span></div>`);
+});
+</script>
+</body>
+</html>
