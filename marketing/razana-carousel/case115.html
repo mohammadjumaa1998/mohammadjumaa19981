@@ -139,7 +139,7 @@ h1.hero .big{display:block;font-weight:900;font-size:96px;line-height:1.16;margi
 
 /* evidence scene card */
 .shot{position:relative;width:100%;height:522px;margin-top:26px;flex:none;border-radius:18px;
-  overflow:hidden;background:linear-gradient(160deg,#162C60 0%,#0E2049 55%,#0A1839 100%);
+  overflow:hidden;background:linear-gradient(160deg,#10224E 0%,#0A1737 55%,#050D24 100%);
   box-shadow:0 30px 60px rgba(2,6,18,.55), 0 0 0 1.5px rgba(239,211,166,.25), inset 0 1px 0 rgba(255,255,255,.10)}
 .shot img{width:100%;height:100%;object-fit:cover;display:block}
 .shot .scene{position:absolute;inset:0;direction:ltr}
@@ -361,9 +361,9 @@ h1.reveal{font-family:'Tajawal',sans-serif;font-weight:900;font-size:88px;line-h
   <div class="halo"></div>
   <div class="d-wrap" style="padding-top:92px">
     <img class="logo-w" src="./logo-white.png" alt="AL RAZANA">
-    <div class="reveal-k">الحقيقة؟</div>
-    <h1 class="reveal foil">هذا المطعم<br>مو موجود</h1>
-    <p class="reveal-s">بس كل سبب وفاة شفته فوق <b>حقيقي</b><br>— نشوفه كل أسبوع بمطابخ غيرنا جهّزها.<br>المطاعم ما تموت من الأكل... <b>تموت من التجهيز الغلط.</b></p>
+    <div class="reveal-k">التحقيق أُغلق...</div>
+    <h1 class="reveal foil">لا تكون أنت<br>القضية 116</h1>
+    <p class="reveal-s">أسباب الوفاة الخمسة اللي شفتها <b>نشوفها كل أسبوع</b> —<br>بمطابخ توصلنا بعد فوات الأوان.<br>المطاعم ما تموت من الأكل... <b>تموت من التجهيز الغلط.</b></p>
     <div class="chips"><span>تصميم</span><span>توريد</span><span>تصنيع</span><span>تركيب</span><span>صيانة</span></div>
     <div class="tagline">مطبخك الجاي... خلّيه يبدأ صح</div>
     <div class="cta">
@@ -443,9 +443,11 @@ document.querySelectorAll('.arcmark').forEach(el=>{
 (()=>{
   const el=document.getElementById('ekg'); if(!el) return;
   el.innerHTML=`<svg viewBox="0 0 900 96" preserveAspectRatio="none">
-    <path d="M0 52 H150 L172 52 L186 14 L200 84 L214 52 H340 L360 52 L371 26 L381 70 L390 52 H520 L538 52 L546 38 L553 62 L560 52 H900"
-      fill="none" stroke="#FE6E2D" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-    <circle cx="880" cy="52" r="7" fill="#FE6E2D"/>
+    <g transform="translate(900 0) scale(-1 1)">
+      <path d="M0 52 H150 L172 52 L186 14 L200 84 L214 52 H340 L360 52 L371 26 L381 70 L390 52 H520 L538 52 L546 38 L553 62 L560 52 H900"
+        fill="none" stroke="#FE6E2D" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="880" cy="52" r="7" fill="#FE6E2D"/>
+    </g>
   </svg>`;
 })();
 
@@ -454,219 +456,212 @@ document.querySelectorAll('.arcmark').forEach(el=>{
    Drop a real photo into photos/115-NN.jpg to replace any scene.
    --------------------------------------------------------------- */
 const C={ln:'#E9D2A4', hot:'#FF7A3C', dim:'rgba(233,210,164,.85)'};
-const GRID=(id)=>`<defs><pattern id="${id}" width="90" height="90" patternUnits="userSpaceOnUse">
-  <path d="M90 0H0V90" fill="none" stroke="${C.ln}" stroke-opacity=".085" stroke-width="2"/></pattern></defs>
-  <rect width="1800" height="928" fill="url(#${id})"/>
-  <g stroke="${C.ln}" stroke-width="3" opacity=".5" fill="none">
-    <path d="M56 92V56h36M1744 92V56h-36M56 836v36h36M1744 836v36h-36"/>
-  </g>
-  <text x="122" y="882" font-size="21" fill="${C.dim}" opacity=".5" letter-spacing="5" font-family="Tajawal">AL RAZANA — CASE 115</text>
-  <text x="1678" y="882" text-anchor="end" font-size="21" fill="${C.dim}" opacity=".5" letter-spacing="5" font-family="Tajawal">FORENSIC FILE</text>`;
-const WARN=(x,y,s)=>`<g transform="translate(${x} ${y}) scale(${s})" stroke="${C.hot}" fill="none" stroke-width="5" stroke-linejoin="round">
-  <path d="M0 52 L30 0 L60 52 Z"/><path d="M30 18 v16" stroke-width="6" stroke-linecap="round"/><circle cx="30" cy="44" r="1.6" fill="${C.hot}"/></g>`;
+const KIT=(id)=>`<defs>
+  <radialGradient id="${id}sp" cx="0.5" cy="0" r="1"><stop offset="0" stop-color="#6E97E8" stop-opacity=".30"/><stop offset=".55" stop-color="#6E97E8" stop-opacity="0"/></radialGradient>
+  <linearGradient id="${id}bd" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2C4C8E"/><stop offset="1" stop-color="#0E1D42"/></linearGradient>
+  <linearGradient id="${id}mt" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#EEF2F7"/><stop offset=".45" stop-color="#BCC6D3"/><stop offset="1" stop-color="#8391A6"/></linearGradient>
+  <linearGradient id="${id}tp" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FF9257"/><stop offset="1" stop-color="#E84D12"/></linearGradient>
+  <filter id="${id}gl" x="-70%" y="-70%" width="240%" height="240%"><feDropShadow dx="0" dy="0" stdDeviation="15" flood-color="#FE6E2D" flood-opacity=".8"/></filter>
+  <filter id="${id}sh" x="-40%" y="-40%" width="180%" height="180%"><feDropShadow dx="0" dy="16" stdDeviation="18" flood-color="#01040C" flood-opacity=".55"/></filter>
+  <filter id="${id}bl" x="-90%" y="-90%" width="280%" height="280%"><feGaussianBlur stdDeviation="15"/></filter>
+</defs>
+<pattern id="${id}gr" width="90" height="90" patternUnits="userSpaceOnUse"><path d="M90 0H0V90" fill="none" stroke="#E9D2A4" stroke-opacity=".05" stroke-width="2"/></pattern>
+<rect width="1800" height="928" fill="url(#${id}gr)"/>
+<rect width="1800" height="928" fill="url(#${id}sp)"/>
+<g stroke="#E9D2A4" stroke-width="3" opacity=".45" fill="none"><path d="M56 92V56h36M1744 92V56h-36M56 836v36h36M1744 836v36h-36"/></g>
+<text x="122" y="882" font-size="21" fill="${C.dim}" opacity=".45" letter-spacing="5" font-family="Tajawal">AL RAZANA — CASE 115</text>
+<text x="1678" y="882" text-anchor="end" font-size="21" fill="${C.dim}" opacity=".45" letter-spacing="5" font-family="Tajawal">FORENSIC FILE</text>`;
+const WARN=(x,y,sc,id)=>`<g transform="translate(${x} ${y}) scale(${sc})" filter="url(#${id}gl)" stroke="#FF7A3C" fill="none" stroke-width="5" stroke-linejoin="round">
+  <path d="M0 52 L30 0 L60 52 Z"/><path d="M30 18 v16" stroke-width="6" stroke-linecap="round"/><circle cx="30" cy="44" r="1.6" fill="#FF7A3C"/></g>`;
 
 const SCENES={
-/* 01 — the 40-metre walk */
+/* 01 — the 40-metre walk, glowing route */
 layout:`<svg viewBox="0 0 1800 928" font-family="Tajawal">
-${GRID('cp1')}
-<g fill="none" stroke="${C.ln}" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
-  <path d="M330 790 V150 H1470 V790 H680"/><path d="M520 790 H330"/>
+${KIT('p1')}
+<ellipse cx="900" cy="818" rx="560" ry="26" fill="#01040C" opacity=".45" filter="url(#p1bl)"/>
+<rect x="330" y="150" width="1140" height="640" rx="10" fill="rgba(110,151,232,.055)" stroke="#E9D2A4" stroke-width="6" stroke-opacity=".85"/>
+<rect x="352" y="172" width="380" height="112" rx="8" fill="rgba(233,210,164,.10)" stroke="#E9D2A4" stroke-width="4"/>
+<rect x="1236" y="656" width="212" height="112" rx="8" fill="rgba(233,210,164,.10)" stroke="#E9D2A4" stroke-width="4"/>
+<text x="542" y="240" text-anchor="middle" font-size="34" fill="${C.dim}">التحضير</text>
+<text x="1342" y="724" text-anchor="middle" font-size="34" fill="${C.dim}">التقديم</text>
+<g filter="url(#p1gl)">
+  <path d="M560 330 H1330 L480 545 L1230 706" fill="none" stroke="#FF7A3C" stroke-width="8" stroke-dasharray="22 18" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M1186 686 L1230 706 L1186 724" fill="none" stroke="#FF7A3C" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="560" cy="330" r="11" fill="#FF7A3C"/>
 </g>
-<g fill="none" stroke="${C.ln}" stroke-width="2.5" opacity=".45">
-  <path d="M352 768 V172 H1448 V768 H692"/><path d="M508 768 H352"/>
-</g>
-<g fill="none" stroke="${C.ln}" stroke-width="5">
-  <rect x="352" y="172" width="360" height="108"/>
-  <rect x="1240" y="660" width="208" height="108"/>
-</g>
-<g fill="none" stroke="${C.ln}" stroke-width="2" opacity=".3">
-  <path d="M420 172 L352 240 M520 172 L412 280 M620 172 L512 280 M712 180 L612 280"/>
-</g>
-<text x="532" y="242" text-anchor="middle" font-size="34" fill="${C.dim}">التحضير</text>
-<text x="1344" y="730" text-anchor="middle" font-size="34" fill="${C.dim}">التقديم</text>
-<g fill="none" stroke="${C.hot}" stroke-width="6" stroke-dasharray="20 16" stroke-linecap="round" stroke-linejoin="round">
-  <path d="M560 320 H1340 L470 540 L1240 714"/>
-</g>
-<g fill="none" stroke="${C.hot}" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
-  <path d="M1296 302 L1340 320 L1300 344"/>
-  <path d="M516 520 L470 540 L514 562"/>
-  <path d="M1196 694 L1240 714 L1196 730"/>
-</g>
-<g fill="none" stroke="${C.ln}" stroke-width="4" stroke-dasharray="12 12" opacity=".8">
-  <path d="M600 770 V430"/>
-</g>
-<g stroke="${C.hot}" stroke-width="9" stroke-linecap="round">
-  <path d="M578 452 l44 44 M622 452 l-44 44"/>
-</g>
-${WARN(570,340,1.15)}
-<g fill="none" stroke="${C.hot}" stroke-width="4">
-  <rect x="890" y="536" width="150" height="64" rx="10"/>
-</g>
-<text x="965" y="581" text-anchor="middle" font-size="38" fill="${C.hot}" font-weight="700">40m</text>
+<g fill="none" stroke="#E9D2A4" stroke-width="4" stroke-dasharray="12 12" opacity=".75"><path d="M610 770 V440"/></g>
+<path d="M596 464 L610 440 L624 464" fill="none" stroke="#E9D2A4" stroke-width="4" opacity=".8" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="700" y="758" text-anchor="middle" font-size="24" fill="${C.dim}" opacity=".8">مسار الصالة</text>
+<g stroke="#FF7A3C" stroke-width="10" stroke-linecap="round" filter="url(#p1gl)"><path d="M586 488 l48 48 M634 488 l-48 48"/></g>
+${WARN(578,392,1.15,'p1')}
+<g filter="url(#p1sh)"><rect x="890" y="536" width="154" height="66" rx="33" fill="url(#p1tp)"/></g>
+<text x="967" y="581" text-anchor="middle" font-size="37" fill="#fff" font-weight="800">٤٠ متر</text>
 </svg>`,
 
-/* 02 — the dead oven */
+/* 02 — the dead oven, cinematic */
 oven:`<svg viewBox="0 0 1800 928" font-family="Tajawal">
-${GRID('cp2')}
-<path d="M260 780 H1540" stroke="${C.ln}" stroke-width="4" opacity=".55" fill="none"/>
-<g fill="none" stroke="${C.ln}" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
-  <rect x="560" y="260" width="520" height="460" rx="10"/>
-  <path d="M560 352 h520"/>
-  <rect x="608" y="392" width="424" height="290" rx="10"/>
-  <path d="M648 432 h344" stroke-width="9"/>
-  <circle cx="820" cy="546" r="68"/>
-  <circle cx="820" cy="546" r="46" stroke-width="4" opacity=".6"/>
+${KIT('p2')}
+<path d="M900 -30 L1330 880 L470 880 Z" fill="#7FA5EF" opacity=".05"/>
+<ellipse cx="830" cy="806" rx="420" ry="30" fill="#01040C" opacity=".55" filter="url(#p2bl)"/>
+<g filter="url(#p2sh)">
+  <rect x="580" y="248" width="500" height="478" rx="16" fill="url(#p2bd)" stroke="rgba(233,210,164,.30)" stroke-width="2.5"/>
 </g>
-<g fill="none" stroke="${C.ln}" stroke-width="5">
-  <circle cx="640" cy="306" r="21"/><circle cx="722" cy="306" r="21"/><circle cx="918" cy="306" r="21"/><circle cx="1000" cy="306" r="21"/>
-  <path d="M640 292 v14 M722 292 v14 M918 292 v14 M1000 292 v14"/>
-  <rect x="778" y="286" width="84" height="40" rx="6"/>
-  <path d="M620 720 v56 M1020 720 v56" stroke-width="7"/>
+<rect x="580" y="248" width="500" height="92" rx="16" fill="#0A1734" opacity=".65"/>
+<path d="M580 340 h500" stroke="rgba(233,210,164,.25)" stroke-width="2"/>
+<g fill="#16294F" stroke="rgba(233,210,164,.45)" stroke-width="2.5">
+  <circle cx="648" cy="296" r="20"/><circle cx="722" cy="296" r="20"/><circle cx="1012" cy="296" r="20"/>
 </g>
-<path d="M786 306 h18 l6 -10 6 16 5 -6 h27" fill="none" stroke="${C.hot}" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-<g fill="none" stroke="${C.ln}" stroke-width="5" stroke-linecap="round">
-  <path d="M560 660 C470 664 452 700 428 722"/>
-  <rect x="374" y="706" width="52" height="34" rx="8" transform="rotate(-18 400 723)"/>
-  <path d="M368 726 l-16 6 M372 740 l-16 6" stroke-width="4"/>
-</g>
-<g fill="none" stroke="${C.ln}" stroke-width="5">
-  <rect x="272" y="620" width="66" height="88" rx="10"/>
-  <circle cx="305" cy="650" r="5" fill="${C.ln}"/><circle cx="305" cy="680" r="5" fill="${C.ln}"/>
-</g>
-${WARN(1150,190,1.7)}
-<g fill="none" stroke="${C.ln}" stroke-width="6">
-  <circle cx="1310" cy="560" r="86"/>
-</g>
-<g transform="translate(1266 516) scale(3.7)" fill="none" stroke="${C.ln}" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+<path d="M648 282 v14 M722 282 v14 M1012 282 v14" stroke="rgba(233,210,164,.6)" stroke-width="3" stroke-linecap="round"/>
+<circle cx="938" cy="296" r="20" fill="none" stroke="rgba(233,210,164,.4)" stroke-width="2.5" stroke-dasharray="6 7"/>
+<g filter="url(#p2gl)"><rect x="790" y="276" width="88" height="42" rx="7" fill="#050B18" stroke="#FF7A3C" stroke-width="2"/>
+<path d="M800 297 h46 l5 -9 4 12 h33" fill="none" stroke="#FF7A3C" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></g>
+<rect x="620" y="372" width="420" height="316" rx="14" fill="#0C1A3A" stroke="rgba(233,210,164,.22)" stroke-width="2"/>
+<rect x="648" y="396" width="364" height="18" rx="9" fill="url(#p2mt)"/>
+<rect x="668" y="452" width="324" height="188" rx="12" fill="#04070F" stroke="rgba(233,210,164,.30)" stroke-width="3"/>
+<path d="M700 620 L816 472" stroke="rgba(255,255,255,.16)" stroke-width="16" fill="none" stroke-linecap="round"/>
+<path d="M852 620 L920 534" stroke="rgba(255,255,255,.10)" stroke-width="10" fill="none" stroke-linecap="round"/>
+<g filter="url(#p2sh)"><circle cx="1148" cy="768" r="22" fill="#16294F" stroke="rgba(233,210,164,.5)" stroke-width="2.5"/></g>
+<path d="M1148 754 v14" stroke="rgba(233,210,164,.6)" stroke-width="3"/>
+<path d="M1052 236 c-6 -26 18 -30 12 -54 c-5 -20 14 -26 12 -44" stroke="#9AA7BE" stroke-width="6" fill="none" opacity=".4" stroke-linecap="round"/>
+<path d="M1006 232 c-5 -20 13 -24 9 -42" stroke="#9AA7BE" stroke-width="5" fill="none" opacity=".28" stroke-linecap="round"/>
+<path d="M640 726 v52 M1020 726 v52" stroke="rgba(233,210,164,.55)" stroke-width="8" stroke-linecap="round"/>
+<path d="M580 664 C470 668 452 706 428 726" stroke="rgba(233,210,164,.6)" stroke-width="5" fill="none" stroke-linecap="round"/>
+<g filter="url(#p2sh)"><rect x="372" y="708" width="54" height="34" rx="8" transform="rotate(-16 399 725)" fill="#16294F" stroke="rgba(233,210,164,.5)" stroke-width="2.5"/></g>
+<path d="M366 728 l-18 7 M370 743 l-18 7" stroke="rgba(233,210,164,.6)" stroke-width="4" stroke-linecap="round"/>
+<rect x="268" y="614" width="70" height="92" rx="10" fill="#0D1B3C" stroke="rgba(233,210,164,.4)" stroke-width="3"/>
+<circle cx="303" cy="646" r="5" fill="#E9D2A4" opacity=".7"/><circle cx="303" cy="676" r="5" fill="#E9D2A4" opacity=".7"/>
+${WARN(1180,180,1.7,'p2')}
+<circle cx="1330" cy="560" r="86" fill="rgba(233,210,164,.06)" stroke="#E9D2A4" stroke-width="5"/>
+<g transform="translate(1286 516) scale(3.7)" fill="none" stroke="#E9D2A4" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
   <path d="M21.5 16.9v2.7a1.8 1.8 0 0 1-2 1.8 17.8 17.8 0 0 1-7.7-2.8 17.5 17.5 0 0 1-5.4-5.4A17.8 17.8 0 0 1 3.6 5.5a1.8 1.8 0 0 1 1.8-2h2.7a1.8 1.8 0 0 1 1.8 1.6c.1.9.3 1.7.6 2.5a1.8 1.8 0 0 1-.4 1.9l-1.1 1.1a14.4 14.4 0 0 0 5.4 5.4l1.1-1.1a1.8 1.8 0 0 1 1.9-.4c.8.3 1.6.5 2.5.6a1.8 1.8 0 0 1 1.6 1.8z"/>
 </g>
-<path d="M1244 626 L1376 494" stroke="${C.hot}" stroke-width="9" stroke-linecap="round"/>
-<g transform="rotate(-16 700 560)">
-  <path d="M706 438 l-26 88" stroke="${C.ln}" stroke-width="4" fill="none"/>
-  <rect x="616" y="524" width="152" height="60" rx="8" fill="none" stroke="${C.ln}" stroke-width="5"/>
-  <circle cx="640" cy="554" r="6" fill="none" stroke="${C.ln}" stroke-width="4"/>
-  <text x="706" y="568" text-anchor="middle" font-size="30" fill="${C.dim}">بلا ضمان</text>
+<path d="M1264 626 L1396 494" stroke="#FF7A3C" stroke-width="10" stroke-linecap="round" filter="url(#p2gl)"/>
+<g transform="rotate(-14 706 560)" filter="url(#p2sh)">
+  <path d="M712 420 l-28 96" stroke="rgba(233,210,164,.6)" stroke-width="4" fill="none"/>
+  <rect x="616" y="512" width="156" height="62" rx="8" fill="#F2E9D4"/>
+  <circle cx="642" cy="543" r="6" fill="none" stroke="#8A7B57" stroke-width="3"/>
+  <text x="712" y="556" text-anchor="middle" font-size="30" fill="#1F3462" font-weight="700">بلا ضمان</text>
 </g>
 </svg>`,
 
-/* 03 — the dead zone gap */
+/* 03 — the dead-zone gap, corrected maths: 2400 = 2000 + 400 */
 gap:`<svg viewBox="0 0 1800 928" font-family="Tajawal">
-${GRID('cp3')}
-<path d="M1400 150 V790" stroke="${C.ln}" stroke-width="9" fill="none"/>
-<g stroke="${C.ln}" stroke-width="3" opacity=".5" fill="none">
-  <path d="M1400 190 l44 -30 M1400 260 l44 -30 M1400 330 l44 -30 M1400 400 l44 -30 M1400 470 l44 -30 M1400 540 l44 -30 M1400 610 l44 -30 M1400 680 l44 -30 M1400 750 l44 -30"/>
+${KIT('p3')}
+<ellipse cx="880" cy="800" rx="540" ry="26" fill="#01040C" opacity=".45" filter="url(#p3bl)"/>
+<g filter="url(#p3sh)"><rect x="1420" y="150" width="56" height="640" fill="url(#p3bd)" stroke="rgba(233,210,164,.35)" stroke-width="2.5"/></g>
+<g filter="url(#p3sh)"><rect x="430" y="432" width="800" height="36" rx="7" fill="url(#p3mt)"/></g>
+<g stroke="#5E6C82" stroke-width="1.6" opacity=".5"><path d="M450 442 h762 M450 452 h762 M450 460 h762"/></g>
+<rect x="468" y="468" width="26" height="252" fill="url(#p3mt)" opacity=".92"/>
+<rect x="1180" y="468" width="26" height="252" fill="url(#p3mt)" opacity=".92"/>
+<rect x="468" y="606" width="738" height="22" rx="4" fill="url(#p3mt)" opacity=".7"/>
+<rect x="1230" y="432" width="190" height="330" fill="#02060F" opacity=".55"/>
+<g fill="#39445C">
+  <path d="M1298 500 c-10 18 -10 30 0 36 c10 -6 10 -18 0 -36z"/>
+  <path d="M1336 588 c-10 18 -10 30 0 36 c10 -6 10 -18 0 -36z"/>
+  <path d="M1292 668 c-10 18 -10 30 0 36 c10 -6 10 -18 0 -36z"/>
 </g>
-<g fill="none" stroke="${C.ln}" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
-  <rect x="430" y="430" width="780" height="42" rx="6"/>
-  <path d="M470 472 v250 M504 472 v250 M1136 472 v250 M1170 472 v250"/>
-  <rect x="470" y="610" width="700" height="26" rx="4"/>
+${WARN(1280,368,1.0,'p3')}
+<g stroke="#E9D2A4" stroke-width="3" opacity=".9" fill="none">
+  <path d="M430 350 H1420 M430 334 V366 M1420 334 V366 M458 342 430 350 458 358 M1392 342 1420 350 1392 358"/>
+  <path d="M430 776 H1230 M430 760 V792 M1230 760 V792 M458 768 430 776 458 784 M1202 768 1230 776 1202 784"/>
 </g>
-<g stroke="${C.ln}" stroke-width="2.5" opacity=".4" fill="none">
-  <path d="M1230 470 l150 -20 M1230 530 l150 -20 M1230 590 l150 -20 M1230 650 l150 -20 M1230 710 l150 -20"/>
+<text x="925" y="324" text-anchor="middle" font-size="34" fill="${C.dim}">2400</text>
+<text x="830" y="754" text-anchor="middle" font-size="34" fill="${C.dim}">2000</text>
+<g filter="url(#p3gl)">
+  <path d="M1230 820 H1420 M1230 804 V836 M1420 804 V836 M1258 812 1230 820 1258 828 M1392 812 1420 820 1392 828" stroke="#FF7A3C" stroke-width="4" fill="none"/>
 </g>
-<g fill="${C.ln}" opacity=".8">
-  <path d="M1300 500 c-9 16 -9 26 0 32 c9 -6 9 -16 0 -32z"/>
-  <path d="M1330 580 c-9 16 -9 26 0 32 c9 -6 9 -16 0 -32z"/>
-  <path d="M1296 662 c-9 16 -9 26 0 32 c9 -6 9 -16 0 -32z"/>
+<text x="1325" y="866" text-anchor="middle" font-size="33" fill="#FF7A3C" font-weight="800" filter="url(#p3gl)">فراغ 400</text>
+<g transform="rotate(-4 330 590)" filter="url(#p3sh)">
+  <rect x="240" y="472" width="180" height="240" rx="12" fill="#F2E9D4"/>
+  <rect x="292" y="454" width="76" height="30" rx="8" fill="#C9B588"/>
+  <g stroke="#E8570E" stroke-width="6" stroke-linecap="round">
+    <path d="M368 536 l24 24 M392 536 l-24 24 M368 602 l24 24 M392 602 l-24 24 M368 668 l24 24 M392 668 l-24 24"/>
+  </g>
+  <g stroke="#8A7B57" stroke-width="4" stroke-linecap="round"><path d="M262 550 h64 M262 616 h64 M262 682 h64"/></g>
 </g>
-${WARN(1270,382,1.0)}
-<g stroke="${C.ln}" stroke-width="3" opacity=".9" fill="none">
-  <path d="M430 366 H1400 M430 350 V382 M1400 350 V382 M458 358 430 366 458 374 M1372 358 1400 366 1372 374"/>
-  <path d="M430 780 H1210 M430 764 V796 M1210 764 V796 M458 772 430 780 458 788 M1182 772 1210 780 1182 788"/>
-</g>
-<g stroke="${C.hot}" stroke-width="3.5" fill="none">
-  <path d="M1210 820 H1400 M1210 804 V836 M1400 804 V836 M1238 812 1210 820 1238 828 M1372 812 1400 820 1372 828"/>
-</g>
-<text x="915" y="340" text-anchor="middle" font-size="34" fill="${C.dim}">2400</text>
-<text x="820" y="758" text-anchor="middle" font-size="34" fill="${C.dim}">2000</text>
-<text x="1305" y="862" text-anchor="middle" font-size="32" fill="${C.hot}" font-weight="700">فراغ 190</text>
-<g fill="none" stroke="${C.ln}" stroke-width="5">
-  <rect x="248" y="200" width="176" height="238" rx="12"/>
-  <path d="M300 200 v-18 h72 v18"/>
-</g>
-<g stroke="${C.hot}" stroke-width="6" stroke-linecap="round">
-  <path d="M282 268 l24 24 M306 268 l-24 24"/>
-  <path d="M282 336 l24 24 M306 336 l-24 24"/>
-  <path d="M282 404 l24 24 M306 404 l-24 24"/>
-</g>
-<g stroke="${C.ln}" stroke-width="4" stroke-linecap="round" opacity=".7">
-  <path d="M330 282 h64 M330 350 h64 M330 418 h64"/>
-</g>
+<path d="M430 350 V430 M1230 776 V470 M430 776 V470" stroke="#E9D2A4" stroke-width="2" opacity=".45" fill="none"/>
 </svg>`,
 
-/* 04 — sealed by the municipality */
+/* 04 — sealed by the municipality, siren-lit */
 seal:`<svg viewBox="0 0 1800 928" font-family="Tajawal">
-${GRID('cp4')}
-<path d="M300 790 H1500" stroke="${C.ln}" stroke-width="4" opacity=".55" fill="none"/>
-<g fill="none" stroke="${C.ln}" stroke-width="8" stroke-linecap="round" stroke-linejoin="round">
-  <rect x="700" y="170" width="400" height="620" rx="6"/>
-  <rect x="730" y="200" width="340" height="590" rx="4" stroke-width="5"/>
-  <circle cx="1042" cy="480" r="13"/>
+${KIT('p4')}
+<ellipse cx="900" cy="818" rx="480" ry="26" fill="#01040C" opacity=".5" filter="url(#p4bl)"/>
+<ellipse cx="330" cy="420" rx="260" ry="330" fill="#FE6E2D" opacity=".08" filter="url(#p4bl)"/>
+<ellipse cx="1480" cy="420" rx="260" ry="330" fill="#4A78D8" opacity=".10" filter="url(#p4bl)"/>
+<g filter="url(#p4sh)">
+  <rect x="690" y="160" width="420" height="646" rx="8" fill="#0A1730" stroke="rgba(233,210,164,.35)" stroke-width="3"/>
+  <rect x="722" y="192" width="356" height="614" rx="6" fill="url(#p4bd)"/>
 </g>
-<g stroke="${C.hot}" stroke-width="36" stroke-linecap="round" opacity=".9">
-  <path d="M660 280 L1140 660" stroke-dasharray="64 22"/>
-  <path d="M1140 280 L660 660" stroke-dasharray="64 22"/>
+<rect x="758" y="240" width="284" height="220" rx="8" fill="none" stroke="rgba(233,210,164,.22)" stroke-width="3"/>
+<rect x="758" y="500" width="284" height="240" rx="8" fill="none" stroke="rgba(233,210,164,.22)" stroke-width="3"/>
+<circle cx="1052" cy="482" r="14" fill="url(#p4mt)"/>
+<g filter="url(#p4sh)">
+  <g transform="rotate(38 900 480)"><rect x="520" y="448" width="760" height="62" fill="url(#p4tp)"/></g>
+  <g transform="rotate(-38 900 480)"><rect x="520" y="448" width="760" height="62" fill="url(#p4tp)"/></g>
 </g>
-<g fill="none" stroke="${C.ln}" stroke-width="6">
-  <circle cx="900" cy="470" r="78" fill="#0E2049"/>
-  <circle cx="900" cy="470" r="62" stroke-width="3" opacity=".7"/>
+<g transform="rotate(38 900 480)" fill="#0A1122" opacity=".85">
+  <rect x="560" y="470" width="34" height="18"/><rect x="640" y="470" width="34" height="18"/><rect x="720" y="470" width="34" height="18"/><rect x="1046" y="470" width="34" height="18"/><rect x="1126" y="470" width="34" height="18"/><rect x="1206" y="470" width="34" height="18"/>
 </g>
-<text x="900" y="492" text-anchor="middle" font-size="44" fill="${C.hot}" font-weight="900">مغلق</text>
-<g fill="none" stroke="${C.ln}" stroke-width="7" stroke-linecap="round">
-  <path d="M420 150 V560"/>
-  <path d="M386 300 h68 M386 322 h68" stroke-width="5"/>
+<g transform="rotate(-38 900 480)" fill="#0A1122" opacity=".85">
+  <rect x="560" y="470" width="34" height="18"/><rect x="640" y="470" width="34" height="18"/><rect x="720" y="470" width="34" height="18"/><rect x="1046" y="470" width="34" height="18"/><rect x="1126" y="470" width="34" height="18"/><rect x="1206" y="470" width="34" height="18"/>
 </g>
-<g stroke="${C.hot}" stroke-width="7" fill="none" stroke-linecap="round">
-  <circle cx="420" cy="420" r="26"/><path d="M420 394 l40 -40"/>
+<g filter="url(#p4sh)" transform="rotate(-7 900 480)">
+  <circle cx="900" cy="480" r="88" fill="#F6EDD9"/>
+  <circle cx="900" cy="480" r="70" fill="none" stroke="#C7480E" stroke-width="4" stroke-dasharray="10 7"/>
 </g>
-<g stroke="${C.hot}" stroke-width="4" fill="none" stroke-linecap="round" opacity=".9">
-  <path d="M452 490 q14 -8 28 0 M452 516 q14 -8 28 0 M452 542 q14 -8 28 0"/>
+<text x="900" y="502" text-anchor="middle" font-size="46" fill="#C7480E" font-weight="900" transform="rotate(-7 900 480)">مغلق</text>
+<rect x="404" y="150" width="20" height="420" rx="9" fill="url(#p4mt)" opacity=".9"/>
+<circle cx="414" cy="400" r="30" fill="none" stroke="#FF7A3C" stroke-width="7" filter="url(#p4gl)"/>
+<path d="M414 370 l42 -42" stroke="#FF7A3C" stroke-width="7" stroke-linecap="round" filter="url(#p4gl)"/>
+<g stroke="#FF7A3C" stroke-width="4.5" fill="none" stroke-linecap="round" filter="url(#p4gl)">
+  <path d="M446 486 q15 -9 30 0 M446 512 q15 -9 30 0 M446 538 q15 -9 30 0"/>
 </g>
-${WARN(500,380,1.1)}
-<g fill="none" stroke="${C.ln}" stroke-width="5">
-  <rect x="1300" y="580" width="180" height="160" rx="12"/>
-  <path d="M1300 624 h180 M1340 580 v-20 M1440 580 v-20"/>
+${WARN(492,376,1.1,'p4')}
+<g filter="url(#p4sh)">
+  <rect x="1296" y="576" width="188" height="170" rx="14" fill="#F2E9D4"/>
+  <rect x="1296" y="576" width="188" height="46" rx="14" fill="#C9B588"/>
+  <rect x="1296" y="600" width="188" height="22" fill="#C9B588"/>
+  <rect x="1332" y="556" width="14" height="34" rx="7" fill="#8A7B57"/>
+  <rect x="1434" y="556" width="14" height="34" rx="7" fill="#8A7B57"/>
 </g>
-<text x="1390" y="722" text-anchor="middle" font-size="80" fill="${C.dim}" font-weight="700">7</text>
-<path d="M1338 716 L1442 634" stroke="${C.hot}" stroke-width="8" stroke-linecap="round"/>
-<text x="1390" y="562" text-anchor="middle" font-size="26" fill="${C.dim}">أيام إغلاق</text>
+<text x="1390" y="722" text-anchor="middle" font-size="78" fill="#1F3462" font-weight="800">7</text>
+<path d="M1338 720 L1444 646" stroke="#FF7A3C" stroke-width="9" stroke-linecap="round" filter="url(#p4gl)"/>
+<text x="1390" y="538" text-anchor="middle" font-size="26" fill="${C.dim}">أيام إغلاق</text>
 </svg>`,
 
-/* 05 — the cooling death */
+/* 05 — the cooling death, melting */
 cold:`<svg viewBox="0 0 1800 928" font-family="Tajawal">
-${GRID('cp5')}
-<path d="M300 780 H1500" stroke="${C.ln}" stroke-width="4" opacity=".55" fill="none"/>
-<g fill="none" stroke="${C.ln}" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
-  <rect x="620" y="200" width="380" height="540" rx="14"/>
-  <path d="M620 430 h380"/>
-  <path d="M952 250 v130 M952 480 v130" stroke-width="10"/>
-  <path d="M660 740 v24 M960 740 v24" stroke-width="6"/>
+${KIT('p5')}
+<ellipse cx="810" cy="818" rx="470" ry="26" fill="#01040C" opacity=".45" filter="url(#p5bl)"/>
+<g filter="url(#p5sh)">
+  <rect x="610" y="190" width="400" height="560" rx="18" fill="url(#p5bd)" stroke="rgba(233,210,164,.30)" stroke-width="2.5"/>
 </g>
-<g fill="none" stroke="${C.hot}" stroke-width="5" stroke-linecap="round">
-  <path d="M700 770 c0 14 -12 14 -12 28 M810 774 c0 14 -12 14 -12 28 M920 770 c0 14 -12 14 -12 28"/>
+<path d="M610 428 h400" stroke="rgba(233,210,164,.30)" stroke-width="3"/>
+<rect x="952" y="240" width="16" height="130" rx="8" fill="url(#p5mt)"/>
+<rect x="952" y="470" width="16" height="130" rx="8" fill="url(#p5mt)"/>
+<path d="M650 750 v26 M970 750 v26" stroke="rgba(233,210,164,.5)" stroke-width="7" stroke-linecap="round"/>
+<g opacity=".85">
+  <path d="M700 776 c0 16 -14 16 -14 32 M812 780 c0 16 -14 16 -14 32 M918 776 c0 16 -14 16 -14 32" stroke="#8FB4E8" stroke-width="6" fill="none" stroke-linecap="round"/>
+  <ellipse cx="810" cy="824" rx="250" ry="20" fill="#8FB4E8" opacity=".22"/>
+  <ellipse cx="770" cy="820" rx="110" ry="9" fill="#C9DCF6" opacity=".28"/>
 </g>
-<ellipse cx="810" cy="836" rx="240" ry="18" fill="none" stroke="${C.ln}" stroke-width="4" opacity=".5"/>
-<g fill="none" stroke="${C.ln}" stroke-width="6" stroke-linecap="round">
-  <rect x="1180" y="220" width="44" height="400" rx="22"/>
-  <circle cx="1202" cy="668" r="50"/>
+<g filter="url(#p5sh)">
+  <rect x="1180" y="220" width="46" height="404" rx="23" fill="rgba(255,255,255,.08)" stroke="#E9D2A4" stroke-width="4"/>
+  <circle cx="1203" cy="672" r="52" fill="rgba(255,255,255,.08)" stroke="#E9D2A4" stroke-width="4"/>
 </g>
-<rect x="1192" y="330" width="20" height="300" rx="10" fill="${C.hot}"/>
-<circle cx="1202" cy="668" r="34" fill="${C.hot}"/>
-<g stroke="${C.ln}" stroke-width="4" stroke-linecap="round" opacity=".8">
-  <path d="M1240 280 h26 M1240 350 h26 M1240 420 h26 M1240 490 h26 M1240 560 h26"/>
+<rect x="1193" y="322" width="20" height="316" rx="10" fill="#FE6E2D" filter="url(#p5gl)"/>
+<circle cx="1203" cy="672" r="36" fill="#FE6E2D" filter="url(#p5gl)"/>
+<g stroke="#E9D2A4" stroke-width="4" stroke-linecap="round" opacity=".7"><path d="M1244 280 h24 M1244 350 h24 M1244 420 h24 M1244 490 h24 M1244 560 h24"/></g>
+<text x="1310" y="318" font-size="46" fill="#FF7A3C" font-weight="900" filter="url(#p5gl)">+38°</text>
+<g stroke="#FF7A3C" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round" filter="url(#p5gl)"><path d="M1330 436 V356 M1308 378 L1330 356 L1352 378"/></g>
+<g stroke="#E9D2A4" stroke-width="7" stroke-linecap="round" fill="none" opacity=".9">
+  <path d="M396 236 v180 M318 326 h156 M341 271 l110 110 M451 271 l-110 110"/>
+  <path d="M396 254 l-15 -15 M396 254 l15 -15 M396 398 l-15 15 M396 398 l15 15 M336 308 l-15 -15 M336 344 l-15 15 M456 308 l15 -15 M456 344 l15 15" stroke-width="5"/>
 </g>
-<text x="1320" y="320" font-size="44" fill="${C.hot}" font-weight="900">+38°</text>
-<g stroke="${C.hot}" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path d="M1330 430 V350 M1310 372 L1330 350 L1350 372"/>
-</g>
-<g stroke="${C.ln}" stroke-width="7" stroke-linecap="round" fill="none">
-  <path d="M400 240 v180 M322 330 h156 M345 275 l110 110 M455 275 l-110 110"/>
-  <path d="M400 258 l-16 -16 M400 258 l16 -16 M400 402 l-16 16 M400 402 l16 16
-           M340 312 l-16 -16 M340 348 l-16 16 M460 312 l16 -16 M460 348 l16 16" stroke-width="5"/>
-</g>
-<path d="M310 424 L494 240" stroke="${C.hot}" stroke-width="10" stroke-linecap="round"/>
-${WARN(505,585,1.2)}
-<text x="536" y="700" text-anchor="middle" font-size="27" fill="${C.dim}">ليلة الخميس 03:00</text>
+<path d="M306 420 L490 236" stroke="#FF7A3C" stroke-width="10" stroke-linecap="round" filter="url(#p5gl)"/>
+<path d="M470 470 l26 26 M470 496 l26 -26" stroke="#E9D2A4" stroke-width="5" stroke-linecap="round" opacity=".55"/>
+${WARN(502,560,1.15,'p5')}
+<text x="536" y="680" text-anchor="middle" font-size="27" fill="${C.dim}">ليلة الخميس 03:00</text>
 </svg>`
 };
 
@@ -693,7 +688,7 @@ document.querySelectorAll('.band').forEach(b=>{
   b.insertAdjacentHTML('beforeend',
     `<div class="stamp yes">${CHECK}<span>ممكن تفاديه</span></div>
      <div class="sep"></div>
-     <div class="stamp no">${CROSS}<span>تم تفاديه</span></div>`);
+     <div class="stamp no">${CROSS}<span>ما تم تفاديه</span></div>`);
 });
 </script>
 </body>
