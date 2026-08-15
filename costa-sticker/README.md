@@ -1,24 +1,28 @@
 # COSTA Lubricant 5W-30 (5L) — Label Recreation
 
-Faithful recreation of the COSTA Lubricant Engine Oil 5W-30 (5L) bottle
-sticker, rebuilt from the reference product photo. All geometry, colors and
-typography were measured off the photo; the engine image and the oil splash
-are extracted from the reference itself.
+Reproduction of the COSTA Lubricant Engine Oil 5W-30 (5L) bottle sticker.
+Two versions are included:
 
-## Files
-- `COSTA-5W30-5L-sticker.pdf` — print-ready PDF, 100 x 142.5 mm (the label's
-  true aspect ratio), die-cut contour shape, no margins.
-- `COSTA-5W30-5L-sticker-3000px.png` — high-resolution raster export.
-- `label.html` — the artwork source (inline SVG); open in a browser to view.
-- `build.py` — generates `label.html` (embeds the extracted assets).
-- `extract_assets.py` — extracts `engine_crop.png` / `splash_crop.png` from
-  the reference photo (`python3 extract_assets.py reference.jpg`).
-- `fonts/` — Russo One, Montserrat, Lora + others (Google Fonts, OFL).
+## 1. Exact version (the deliverable)
+The complete label artwork lifted directly from the reference photo —
+identical logo, blue zones, curves, medal, engine image and oil splash —
+die-cut along the label's real contour with a transparent background.
+- `COSTA-5W30-5L-sticker.pdf` — print PDF, 100 x 142.5 mm.
+- `COSTA-5W30-5L-sticker-3000px.png` — high-resolution export.
+- `label_exact.png` — the extracted die-cut artwork (RGBA).
+- `label_exact.html` — page wrapper used for the PDF export.
+- `extract_exact.py` — regenerates label_exact.png from the reference photo.
+
+## 2. Vector version (editable)
+A full vector rebuild (measured off the photo) for future edits — change
+viscosity, size, or text and re-export at any print resolution.
+- `label.html` (source), `build.py` (generator), `extract_assets.py`
+  (engine/splash extraction), `fonts/` (Russo One, Montserrat, Lora — OFL).
 
 ## Rebuild
 ```bash
-python3 extract_assets.py reference.jpg   # only if assets are missing
-python3 build.py
-chromium --headless --no-sandbox --print-to-pdf=COSTA-5W30-5L-sticker.pdf \
-  --no-pdf-header-footer "file://$PWD/label.html"
+python3 extract_exact.py reference.jpg   # exact artwork
+python3 build.py                          # vector version
+chromium --headless --no-sandbox --print-to-pdf=out.pdf \
+  --no-pdf-header-footer "file://$PWD/label_exact.html"
 ```
