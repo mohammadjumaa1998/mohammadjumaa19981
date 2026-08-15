@@ -1,28 +1,27 @@
-# COSTA Lubricant 5W-30 (5L) — Label Recreation
+# COSTA Lubricant 5W-30 (5L) — Label
 
-Reproduction of the COSTA Lubricant Engine Oil 5W-30 (5L) bottle sticker.
-Two versions are included:
+Print-ready recreation of the COSTA Lubricant Engine Oil 5W-30 (5L) sticker.
 
-## 1. Exact version (the deliverable)
-The complete label artwork lifted directly from the reference photo —
-identical logo, blue zones, curves, medal, engine image and oil splash —
-die-cut along the label's real contour with a transparent background.
-- `COSTA-5W30-5L-sticker.pdf` — print PDF, 100 x 142.5 mm.
-- `COSTA-5W30-5L-sticker-3000px.png` — high-resolution export.
-- `label_full.png` — the extracted artwork (clipped by the spline die path).
-- `label_exact.html` — page wrapper used for the PDF export.
-- `make_final.py` — full pipeline: extraction, spline die-cut contour, frame.
+## Deliverable (vector master)
+Full vector artwork — every text, band, medal, frame and background shape is
+vector (razor sharp at any zoom); only the engine photo and the oil splash
+are raster, extracted from the reference image. Idealized die-cut geometry:
+straight edges, clean corner sweep. Colors sampled from the reference.
+- `COSTA-5W30-5L-sticker.pdf` — vector print PDF, 100 x 142.5 mm, no margins.
+- `COSTA-5W30-5L-sticker-3000px.png` / `-6000px.png` — raster exports.
+- `label.html` — the artwork source (inline SVG).
+- `build.py` — generates `label.html`.
+- `extract_assets.py` — extracts `engine_crop.png` / `splash_crop.png`.
+- `fonts/` — Russo One, Montserrat, Lora and others (Google Fonts, OFL).
 
-## 2. Vector version (editable)
-A full vector rebuild (measured off the photo) for future edits — change
-viscosity, size, or text and re-export at any print resolution.
-- `label.html` (source), `build.py` (generator), `extract_assets.py`
-  (engine/splash extraction), `fonts/` (Russo One, Montserrat, Lora — OFL).
+## Reference-lift version (for comparison)
+- `label_exact.html` + `label_full.png` + `make_final.py` — the label lifted
+  pixel-for-pixel from the reference photo with a spline die-cut. Identical
+  to the source but resolution-limited (kept for reference).
 
 ## Rebuild
 ```bash
-python3 make_final.py reference.jpg      # exact artwork + clean edges
-python3 build.py                          # vector version
-chromium --headless --no-sandbox --print-to-pdf=out.pdf \
-  --no-pdf-header-footer "file://$PWD/label_exact.html"
+python3 build.py
+chromium --headless --no-sandbox --print-to-pdf=COSTA-5W30-5L-sticker.pdf \
+  --no-pdf-header-footer "file://$PWD/label.html"
 ```
