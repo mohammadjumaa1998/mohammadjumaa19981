@@ -30,13 +30,15 @@ DIE = ("M 168 3 H 753 "
 
 # Diagonal divider between the dark navy zone (upper-left) and the light
 # glow wedge (lower-right).
-DIVIDER = "M 942 433 C 720 720 480 1030 292 1425"
-DARKSIDE = "M 942 433 C 720 720 480 1030 292 1425 L -2 1427 L -2 -2 L 947 -2 Z"
-WEDGE = "M 942 433 C 720 720 480 1030 292 1425 L 1004 1425 L 1004 420 Z"
+DIVIDER = "M -2 867 C 250 852 520 780 720 705 C 850 655 902 540 925 425"
+DARKSIDE = ("M -2 867 C 250 852 520 780 720 705 C 850 655 902 540 925 425 "
+            "L 1004 465 L 1004 -4 L -4 -4 Z")
+WEDGE = ("M -2 867 C 250 852 520 780 720 705 C 850 655 902 540 925 425 "
+         "L 1004 465 L 1004 1429 L -4 1429 Z")
 
 # Decorative silver S-arc inside the dark zone (parallels the top-right
 # corner, then sweeps left underneath the logo block).
-SARC = "M 742 6 C 880 100 935 290 830 380 C 700 480 380 445 130 505"
+SARC = "M 614 4 C 780 100 870 280 820 390 C 740 470 350 460 -2 462"
 
 
 def b64(path):
@@ -88,8 +90,8 @@ def defs():
   <clipPath id="clipDie"><path d="{DIE}"/></clipPath>
   <clipPath id="clipDark"><path d="{DARKSIDE}"/></clipPath>
   <clipPath id="clipWedge"><path d="{WEDGE}"/></clipPath>
-  <clipPath id="clipEngine"><circle cx="250" cy="1023" r="165"/></clipPath>
-  <clipPath id="clipFlagC"><circle cx="713" cy="1345" r="46"/></clipPath>
+  <clipPath id="clipEngine"><circle cx="250" cy="1033" r="175"/></clipPath>
+  <clipPath id="clipFlagC"><circle cx="720" cy="1338" r="44"/></clipPath>
 
   <linearGradient id="gFrame" x1="0" y1="0" x2="0.25" y2="1">
     <stop offset="0" stop-color="#f4f5f7"/><stop offset="0.22" stop-color="#c7cad0"/>
@@ -101,10 +103,10 @@ def defs():
     <stop offset="0.75" stop-color="#2b53b0"/><stop offset="1" stop-color="#2e5fbf"/>
   </linearGradient>
   <linearGradient id="gWedge" x1="0.2" y1="0" x2="0.7" y2="1">
-    <stop offset="0" stop-color="#3f7fd0"/><stop offset="0.45" stop-color="#4e97de"/>
-    <stop offset="1" stop-color="#3b7ecb"/>
+    <stop offset="0" stop-color="#4a8ed8"/><stop offset="0.45" stop-color="#5aa2e6"/>
+    <stop offset="1" stop-color="#4589d4"/>
   </linearGradient>
-  <radialGradient id="gGlow" cx="0.62" cy="0.42" r="0.55">
+  <radialGradient id="gGlow" cx="0.68" cy="0.48" r="0.55">
     <stop offset="0" stop-color="#b8def8" stop-opacity="0.9"/>
     <stop offset="0.5" stop-color="#8ec6f2" stop-opacity="0.5"/>
     <stop offset="1" stop-color="#8ec6f2" stop-opacity="0"/>
@@ -199,20 +201,26 @@ def background():
   <path d="{WEDGE}" fill="url(#gWedge)"/>
   <g clip-path="url(#clipWedge)">
     <rect x="280" y="380" width="740" height="1050" fill="url(#gGlow)"/>
-    <!-- glossy swirl arcs across the bottom -->
-    <g fill="none" opacity="0.8">
-      <circle cx="640" cy="1585" r="392" stroke="#9fd0f5" stroke-width="16" opacity="0.55"/>
-      <circle cx="620" cy="1610" r="330" stroke="#bfe2fa" stroke-width="9" opacity="0.6"/>
-      <circle cx="660" cy="1560" r="470" stroke="#7fbfef" stroke-width="26" opacity="0.3"/>
-      <circle cx="600" cy="1655" r="270" stroke="#8ec6f2" stroke-width="12" opacity="0.4"/>
+    <!-- giant glossy swirl across the bottom half -->
+    <circle cx="520" cy="1270" r="420" fill="#8fc8f3" opacity="0.12"/>
+    <g fill="none">
+      <circle cx="520" cy="1270" r="420" stroke="#c4e2fa" stroke-width="14" opacity="0.75"/>
+      <circle cx="560" cy="1300" r="330" stroke="#cfe9fb" stroke-width="9" opacity="0.55"/>
+      <circle cx="500" cy="1240" r="490" stroke="#7fbfef" stroke-width="20" opacity="0.25"/>
     </g>
-    <g transform="rotate(-55 700 800)">{streaks(5, 22, 8, 0.02, 0.07)}</g>
+    <g transform="rotate(-55 700 800)">{streaks(5, 26, 9, 0.035, 0.10)}</g>
   </g>
   <!-- divider piping -->
   <path d="{DIVIDER}" stroke="#0a1c4a" stroke-width="2.5" fill="none" opacity="0.4" transform="translate(3,3)"/>
   <path d="{DIVIDER}" stroke="url(#gSilverLine)" stroke-width="4" fill="none"/>
   <!-- decorative S-arc inside the dark zone -->
   <path d="{SARC}" stroke="url(#gSilverLine)" stroke-width="3" fill="none" opacity="0.9"/>
+  <!-- sparkles on the gloss -->
+  <g fill="#ffffff" opacity="0.9">
+    <path d="{star4(708, 1233, 9)}"/>
+    <path d="{star4(747, 1263, 6)}"/>
+    <path d="{star4(768, 1286, 5)}"/>
+  </g>
   <!-- corner vignette -->
   <rect x="0" y="0" width="1000" height="1425" fill="#02123a" opacity="0.08"
         style="mix-blend-mode:multiply"/>
@@ -225,19 +233,19 @@ def logo():
     return """
 <!-- ================= logo ================= -->
 <g filter="url(#fTextShadow)">
-  <g transform="scale(0.9 1)">
-    <text x="522" y="348" text-anchor="middle" font-family="Russo" font-size="143"
+  <g transform="scale(0.88 1)">
+    <text x="531.8" y="369" text-anchor="middle" font-family="Russo" font-size="152"
           fill="#6e4e14" opacity="0.9">COSTA</text>
-    <text x="522" y="345" text-anchor="middle" font-family="Russo" font-size="143"
+    <text x="531.8" y="366" text-anchor="middle" font-family="Russo" font-size="152"
           fill="url(#gGold)" stroke="#6e4e14" stroke-width="1">COSTA</text>
   </g>
 </g>
 <!-- amber drop inside the O -->
-<path d="M 384 266 C 376 285 368 296 368 306 a 16 16 0 0 0 32 0 C 400 296 392 285 384 266 Z"
+<path d="M 379 273 C 371 293 363 304 363 315 a 16 16 0 0 0 32 0 C 395 304 387 293 379 273 Z"
       fill="url(#gDropAmber)" stroke="#ffffff" stroke-width="2.5"/>
-<ellipse cx="378" cy="301" rx="3.6" ry="5.5" fill="#fff6d8" opacity="0.85" transform="rotate(-14 378 301)"/>
-<text x="468" y="393" text-anchor="middle" font-family="Montserrat" font-weight="500"
-      font-size="25" letter-spacing="13" fill="#ebd9a8">LUBRICANT</text>
+<ellipse cx="373" cy="310" rx="3.6" ry="5.5" fill="#fff6d8" opacity="0.85" transform="rotate(-14 373 302)"/>
+<text x="468" y="404" text-anchor="middle" font-family="Montserrat" font-weight="500"
+      font-size="25" letter-spacing="16" fill="#ebd9a8">LUBRICANT</text>
 """
 
 
@@ -246,37 +254,42 @@ def engine_oil():
 <!-- ================= ENGINE OIL ================= -->
 <g filter="url(#fTextShadow)">
   <g transform="scale(0.92 1)">
-    <text x="402" y="588" text-anchor="middle" font-family="Russo" font-size="76"
+    <text x="402" y="584" text-anchor="middle" font-family="Russo" font-size="82"
           letter-spacing="2" fill="#ffffff">ENGINE OIL</text>
   </g>
 </g>"""
 
 
 def badge():
-    cx, cy = 853, 720
-    star_l = star4(cx - 56, cy - 40, 9)
-    star_r = star4(cx + 56, cy - 40, 9)
+    cx, cy = 845, 735
+    star_l = star4(cx - 56, cy - 46, 8)
+    star_r = star4(cx + 56, cy - 46, 8)
     return f"""
 <!-- ================= best quality medal (silver) ================= -->
 <g filter="url(#fShadow)">
-  <path d="{wavy_rosette(cx, cy, 88, 8, 14)}" fill="url(#gRing)" stroke="#63676e" stroke-width="1.5"/>
-  <circle cx="{cx}" cy="{cy}" r="76" fill="url(#gDiscSilver)" stroke="#787d85" stroke-width="1.5"/>
-  <circle cx="{cx}" cy="{cy}" r="76" fill="url(#gDiscSheen)"/>
-  <circle cx="{cx}" cy="{cy}" r="70" fill="none" stroke="#9ba0a8" stroke-width="1" opacity="0.7"/>
-  <g fill="#1a2b5a">
+  <path d="{wavy_rosette(cx, cy, 100, 8, 13)}" fill="url(#gRing)" stroke="#63676e" stroke-width="1.5"/>
+  <circle cx="{cx}" cy="{cy}" r="97" fill="url(#gDiscSilver)"/>
+  <circle cx="{cx}" cy="{cy}" r="87" fill="none" stroke="#16264f" stroke-width="11"/>
+  <circle cx="{cx}" cy="{cy}" r="81" fill="url(#gDiscSilver)"/>
+  <circle cx="{cx}" cy="{cy}" r="81" fill="url(#gDiscSheen)"/>
+  <g fill="#16264f">
     <path d="{star_l}"/><path d="{star_r}"/>
-    <text x="{cx}" y="{cy - 31}" text-anchor="middle" font-family="Montserrat" font-weight="800"
-          font-size="25">100%</text>
-    <text x="{cx}" y="{cy + 17}" text-anchor="middle" font-family="Lora" font-weight="700"
-          font-size="58">BEST</text>
+    <text x="{cx}" y="{cy - 35}" text-anchor="middle" font-family="Montserrat" font-weight="800"
+          font-size="34">100%</text>
+    <g transform="scale(0.68 1)">
+      <text x="{cx / 0.68:.1f}" y="{cy + 20}" text-anchor="middle" font-family="Lora" font-weight="700"
+            font-size="69">BEST</text>
+    </g>
     <text x="{cx}" y="{cy + 45}" text-anchor="middle" font-family="Montserrat" font-weight="600"
-          font-size="17" letter-spacing="6">QUALITY</text>
+          font-size="24" letter-spacing="4">QUALITY</text>
+    <rect x="{cx - 44}" y="{cy + 51}" width="88" height="2.2"/>
+    <rect x="{cx - 30}" y="{cy + 58}" width="60" height="2.2"/>
   </g>
 </g>"""
 
 
 def bands():
-    x0, x1, tx = 417, 992, 483
+    x0, x1, tx = 400, 992, 465
     return f"""
 <!-- ================= spec bands ================= -->
 <g clip-path="url(#clipDie)">
@@ -290,15 +303,15 @@ def bands():
   <rect x="{x0}" y="1176" width="{x1 - x0}" height="4" fill="url(#gSilverLine)"/>
 
   <g transform="scale(0.85 1)">
-    <text x="{tx / 0.85}" y="940" font-family="Russo" font-size="60" letter-spacing="5"
+    <text x="{tx / 0.85}" y="941" font-family="Russo" font-size="65" letter-spacing="4"
           fill="#f2e8c0">SYNTHETIC</text>
   </g>
   <g filter="url(#fTextShadow)">
     <text x="{tx}" y="1073" font-family="Russo" font-size="128" letter-spacing="2"
           fill="#ffffff">5W-30</text>
   </g>
-  <text x="{tx}" y="1168" font-family="Russo" font-size="81" fill="#ffffff">API<tspan
-        fill="#f2e8c0" dx="26">SP</tspan></text>
+  <text x="{tx}" y="1163" font-family="Russo" font-size="64" fill="#ffffff">API<tspan
+        fill="#f2e8c0" dx="22">SP</tspan></text>
 </g>"""
 
 
@@ -307,14 +320,14 @@ def engine_circle():
     return f"""
 <!-- ================= engine photo (extracted from reference) ============ -->
 <g filter="url(#fShadow)">
-  <circle cx="250" cy="1023" r="178" fill="url(#gRing)"/>
+  <circle cx="250" cy="1033" r="187" fill="url(#gRing)"/>
 </g>
 <g clip-path="url(#clipEngine)">
-  <image x="77" y="850" width="347" height="347" preserveAspectRatio="none"
+  <image x="63" y="846" width="374" height="374" preserveAspectRatio="none"
          href="data:image/png;base64,{img}"/>
 </g>
-<circle cx="250" cy="1023" r="166" fill="none" stroke="#71767d" stroke-width="1.5"/>
-<circle cx="250" cy="1023" r="178" fill="none" stroke="#83878d" stroke-width="1.2"/>
+<circle cx="250" cy="1033" r="176" fill="none" stroke="#71767d" stroke-width="1.5"/>
+<circle cx="250" cy="1033" r="187" fill="none" stroke="#83878d" stroke-width="1.2"/>
 """
 
 
@@ -323,7 +336,7 @@ def splash():
     return f"""
 <!-- ================= oil splash (extracted from reference) ============= -->
 <g clip-path="url(#clipDie)">
-  <image x="333" y="1067" width="683" height="333" preserveAspectRatio="none"
+  <image x="325" y="1067" width="692" height="350" preserveAspectRatio="none"
          href="data:image/png;base64,{img}"/>
 </g>"""
 
@@ -332,31 +345,31 @@ def five_l():
     return """
 <!-- ================= 5L ================= -->
 <g filter="url(#fTextShadow)">
-  <text x="87" y="1395" font-family="Russo" font-size="200"
-        fill="url(#gSilverText)">5<tspan font-size="139" dx="4">L</tspan></text>
+  <text x="50" y="1405" font-family="Russo" font-size="139"
+        fill="url(#gSilverText)">5<tspan font-size="93" dx="3">L</tspan></text>
 </g>"""
 
 
 def german():
-    cx, cy = 713, 1345
+    cx, cy = 720, 1338
     return f"""
 <!-- ================= german technology ================= -->
 <g filter="url(#fShadowS)">
-  <path d="M 772 1305 H 908 L 950 1341.5 L 908 1378 H 772 Z" fill="url(#gPlate)"
+  <path d="M 775 1303 H 910 L 950 1339 L 910 1375 H 775 Z" fill="url(#gPlate)"
         stroke="#8b8f96" stroke-width="1.5" stroke-linejoin="round"/>
-  <text x="782" y="1332" font-family="Montserrat" font-weight="500" font-size="20"
-        letter-spacing="7" fill="#e8ebef">GERMAN</text>
-  <text x="782" y="1363" font-family="Montserrat" font-weight="800" font-size="23"
+  <text x="795" y="1333" font-family="Montserrat" font-weight="500" font-size="20"
+        letter-spacing="9" fill="#e8ebef">GERMAN</text>
+  <text x="795" y="1364" font-family="Montserrat" font-weight="800" font-size="20"
         letter-spacing="1" fill="#ffffff">TECHNOLOGY</text>
 </g>
 <g filter="url(#fShadowS)">
-  <path d="{wavy_rosette(cx, cy, 62, 7, 10)}" fill="#17181c" stroke="#3a3d43" stroke-width="1.5"/>
-  <circle cx="{cx}" cy="{cy}" r="50" fill="url(#gRing)"/>
+  <path d="{wavy_rosette(cx, cy, 52, 6, 10)}" fill="#17181c" stroke="#3a3d43" stroke-width="1.5"/>
+  <circle cx="{cx}" cy="{cy}" r="47" fill="url(#gRing)"/>
   <g clip-path="url(#clipFlagC)">
-    <rect x="{cx - 46}" y="{cy - 46}" width="92" height="31" fill="#161616"/>
-    <rect x="{cx - 46}" y="{cy - 15}" width="92" height="31" fill="#d5121e"/>
-    <rect x="{cx - 46}" y="{cy + 16}" width="92" height="31" fill="#f7c500"/>
-    <circle cx="{cx}" cy="{cy}" r="46" fill="url(#gGlossFlag)"/>
+    <rect x="{cx - 44}" y="{cy - 44}" width="88" height="30" fill="#161616"/>
+    <rect x="{cx - 44}" y="{cy - 14}" width="88" height="29" fill="#d5121e"/>
+    <rect x="{cx - 44}" y="{cy + 15}" width="88" height="29" fill="#f7c500"/>
+    <circle cx="{cx}" cy="{cy}" r="44" fill="url(#gGlossFlag)"/>
   </g>
 </g>"""
 
