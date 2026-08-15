@@ -60,8 +60,8 @@ d1 = np.roll(pts, -4, 0) - np.roll(pts, 4, 0)
 nrm = np.stack([-d1[:, 1], d1[:, 0]], 1)
 nrm /= np.linalg.norm(nrm, axis=1, keepdims=True) + 1e-9
 sign = 1.0 if np.dot(nrm[0], np.array([cx, cy]) - pts[0]) > 0 else -1.0
-clip_pts = pts + sign*3.0*nrm
-border_pts = pts + sign*1.0*nrm
+clip_pts = pts + sign*10.5*nrm
+border_pts = pts + sign*8.0*nrm
 
 def path_of(p):
     xv = (p[:, 0] + x0 - 100) * (1000/600.0)
@@ -95,9 +95,9 @@ svg {{ display:block; width:100vw; height:100vh; }}
     <image x="-13.3" y="-15" width="1026.7" height="1456.7" preserveAspectRatio="none"
            href="label_full.png"/>
   </g>
-  <path d="{path_of(border_pts)}" fill="none" stroke="#6b6f76" stroke-width="11" stroke-linejoin="round"/>
-  <path d="{path_of(border_pts)}" fill="none" stroke="url(#gMetal)" stroke-width="8.5" stroke-linejoin="round"/>
-  <path d="{path_of(border_pts)}" fill="none" stroke="#ffffff" stroke-width="1.5" opacity="0.65" stroke-linejoin="round"/>
+  <path d="{path_of(border_pts)}" fill="none" stroke="#565a61" stroke-width="13" stroke-linejoin="round"/>
+  <path d="{path_of(border_pts)}" fill="none" stroke="url(#gMetal)" stroke-width="10" stroke-linejoin="round"/>
+  <path d="{path_of(border_pts)}" fill="none" stroke="#ffffff" stroke-width="1.6" opacity="0.7" stroke-linejoin="round"/>
 </svg>
 </body></html>"""
 open('label_exact.html', 'w').write(html)
